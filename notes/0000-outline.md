@@ -48,12 +48,12 @@ especially for text using technical terms.
    - Smaller options for local hardware: Qwen2.5-7B, Mistral-7B-Instruct-v0.3
    - Specialized: NLLB (No Language Left Behind) for translation-specific tasks
 
-2. **Essential Papers & Reading**:
+2. **Essential Papers & Reading** (downloaded to `static/papers/`):
    - *"Large Language Models are State-of-the-Art Translators"* (Zhu et al., 2024) - arXiv:2401.01319
-   - *"Prompting Large Language Models for Machine Translation"* (Briggs et al.)
-   - *"The Curious Case of Hallucinations in LLM Translation"* - important for critical discussion
-   - Flores-101 evaluation dataset paper (Goyal et al., 2022)
-   - *"Translation Quality Estimation with LLMs"* - emerging area
+   - *"Prompting Large Language Models for Machine Translation"* (Briggs et al.) - arXiv:2004.03017
+   - *"The Curious Case of Hallucinations in LLM Translation"* (2023) - arXiv:2305.11008
+   - *"The Flores-101 Evaluation Benchmark"* (Goyal et al., 2022) - arXiv:2106.03193
+   - *"Translation Quality Estimation with LLMs"* (2023) - arXiv:2309.08209
 
 3. **Datasets to Inspect/Evaluate**:
    - **Flores-101**: 101 languages, dev/devtest splits - good for quick evaluation
