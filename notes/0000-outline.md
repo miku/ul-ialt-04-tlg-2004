@@ -91,13 +91,13 @@ especially for text using technical terms.
 
 8. **Prompt Library Starter**:
    ```
-   You are a professional translator specializing in [DOMAIN]. 
+   You are a professional translator specializing in [DOMAIN].
    Translate the following text from [SOURCE] to [TARGET].
    Maintain technical terminology consistency.
    Do not add explanations, output only the translation.
-   
+
    Key terms to preserve: [TERM1], [TERM2], ...
-   
+
    Text: [INPUT]
    ```
 
