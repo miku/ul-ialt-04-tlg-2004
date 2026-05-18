@@ -52,15 +52,18 @@ fast; very different speeds of adoption, wide variety of results:
 Rule-based machine translation
 ([RBMT](https://en.wikipedia.org/wiki/Rule-based_machine_translation)), [EBMT](https://en.wikipedia.org/wiki/Example-based_machine_translation), ...
 
+[![](static/Image2.gif)](https://lilab.unibas.ch/staff/tenhacken/Applied-CL/3_Systran/3_Systran.html#history)
+
 Wikipedia categories:
 
 > Dictionary-based, Rule-based, Transfer-based, Statistical, Example-based, Interlingual, Neural, Hybrid
 
 Current wave: Neural machine translation ([NMT](https://en.wikipedia.org/wiki/Neural_machine_translation))
 
-
-
-[![](static/Image2.gif)](https://lilab.unibas.ch/staff/tenhacken/Applied-CL/3_Systran/3_Systran.html#history)
+> Neural machine translation is a recently proposed approach to machine
+> translation. Unlike the traditional statistical machine translation, the
+> neural machine translation aims at building a single neural network that can
+> be jointly tuned to maximize the translation performance. -- [NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE](https://arxiv.org/pdf/1409.0473) (05/2016)
 
 Jump to 2014:
 
@@ -75,7 +78,19 @@ Jump to 2014:
 Jump to 2026:
 
 * [translategemma](https://arxiv.org/pdf/2601.09012) (01/2026)
+
+> To this end, we present TranslateGemma, an open variant of the Gemma 3
+> foundation model (Gemma Team, 2025), specifically enhanced for machine
+> translation.
+
 * [tencent HY-MT1.5](https://arxiv.org/pdf/2512.24092) (12/2025)
+
+> HY-MT1.5-1.8B, the 1.8B-parameter model demonstrates remarkable parameter
+> efficiency, comprehensively outperforming significantly larger open-source
+> baselines (e.g., Tower-Plus-72B, Qwen3- 32B) and mainstream commercial APIs
+> (e.g., Microsoft Translator, Doubao Translator) in standard Chinese-foreign
+> and English-foreign tasks.
+
 * [NLLB](https://huggingface.co/docs/transformers/en/model_doc/nllb),
   [nllb-200-3.3B](https://huggingface.co/facebook/nllb-200-3.3B) ("Primary
 intended uses: NLLB-200 is a machine translation model primarily intended for
