@@ -45,9 +45,17 @@ fast; very different speeds of adoption, wide variety of results:
 
 ## Are there local LLM specifically for translations?
 
+Yes. On HF, we find about 12K models under the *translation* tag.
+
 ![](static/screenshot-2026-05-18-220355-hf-tag-translation.png)
 
+There are also some notable
+
 * translategemma
+
+### Evaluation
+
+* [WMT25](https://aclanthology.org/2025.wmt-1.22.pdf), "WMT25 General Machine Translation Shared Task"
 
 ### Top 30 Models
 
