@@ -49,9 +49,25 @@ Yes. On HF, we find about 12K models under the *translation* tag.
 
 ![](static/screenshot-2026-05-18-220355-hf-tag-translation.png)
 
-There are also some notable
+Some noteable models:
 
-* translategemma
+* [translategemma](https://blog.google/innovation-and-ai/technology/developers-tools/translategemma/) (01/2026)
+* tencent [HY-MT 1.5](https://arxiv.org/abs/2512.24092) (12/2025)
+
+Models come with prompt templates; used during training that are optimal for the task. Example prompt template for translategemma, from their [technical report](https://arxiv.org/pdf/2601.09012):
+
+> You are a professional {source_lang} ({src_lang_code}) to {target_lang}
+> ({tgt_lang_code}) translator. Your goal is to accurately convey the meaning
+> and nuances of the original {source_lang} text while adhering to
+> {target_lang} grammar, vocabulary, and cultural sensitivities. Produce only
+> the {target_lang} translation, without any additional explanations or
+> commentary. Please translate the following {source_lang} text into
+> {target_lang}:\n\n\n{text}
+
+The HY-MT1.5 model support prompt templates and additional, practical helpers,
+like: "Terminology Translation", "Context Translation", ...
+
+[![](static/2512.24092v1-page-09.png)](https://arxiv.org/pdf/2512.24092#page=9)
 
 ### Evaluation
 
@@ -72,3 +88,7 @@ Since 2026:
 ![](static/2026-05-18-hf-translation-top-30-since-2026.png)
 
 ## How does context influence translations quality?
+
+* Prompting
+* Agentic Translation
+
