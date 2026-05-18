@@ -9,7 +9,7 @@
 
 ## Local LLM and notes on LLM for translation
 
-Questions for today:
+Three questions for today:
 
 * What is a local LLM and how can I work work with one?
 * Are there local LLM specifically for translations?
@@ -38,8 +38,29 @@ fast; very different speeds of adoption, wide variety of results:
 > closer inspection, these codebases inevitably turn out to be more like
 > dancing elephants than useful engineering artifacts.
 
+## What is a local LLM and how can I work with one?
 
+* what is an LLM? an llm is a file
+* example how you run them: you can download it, ollama, jan.ai, ...
 
-## Local LLM and Translation
+## Are there local LLM specifically for translations?
 
+![](static/screenshot-2026-05-18-220355-hf-tag-translation.png)
 
+* translategemma
+
+### Top 30 Models
+
+All time:
+
+![](static/2026-05-18-hf-translation-top-30.png)
+
+Since 2025:
+
+![](static/2026-05-18-hf-translation-top-30-since-2025.png)
+
+Since 2026:
+
+![](static/2026-05-18-hf-translation-top-30-since-2026.png)
+
+## How does context influence translations quality?
