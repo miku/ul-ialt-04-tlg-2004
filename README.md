@@ -50,7 +50,15 @@ fast; very different speeds of adoption, wide variety of results:
 * Various paradigms: Statistical machine translation
   ([SMT](https://en.wikipedia.org/wiki/Statistical_machine_translation)),
 Rule-based machine translation
-([RBMT](https://en.wikipedia.org/wiki/Rule-based_machine_translation)), [EBMT](https://en.wikipedia.org/wiki/Example-based_machine_translation)...
+([RBMT](https://en.wikipedia.org/wiki/Rule-based_machine_translation)), [EBMT](https://en.wikipedia.org/wiki/Example-based_machine_translation), ...
+
+Wikipedia categories:
+
+> Dictionary-based, Rule-based, Transfer-based, Statistical, Example-based, Interlingual, Neural, Hybrid
+
+Current wave: Neural machine translation ([NMT](https://en.wikipedia.org/wiki/Neural_machine_translation))
+
+
 
 [![](static/Image2.gif)](https://lilab.unibas.ch/staff/tenhacken/Applied-CL/3_Systran/3_Systran.html#history)
 
