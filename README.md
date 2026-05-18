@@ -45,7 +45,54 @@ fast; very different speeds of adoption, wide variety of results:
 
 ## Are there local LLM specifically for translations?
 
-Yes. On HF, we find about 12K models under the *translation* tag.
+### Background
+
+* Various paradigms: Statistical machine translation
+  ([SMT](https://en.wikipedia.org/wiki/Statistical_machine_translation)),
+Rule-based machine translation
+([RBMT](https://en.wikipedia.org/wiki/Rule-based_machine_translation)), [EBMT](https://en.wikipedia.org/wiki/Example-based_machine_translation)...
+
+[![](static/Image2.gif)](https://lilab.unibas.ch/staff/tenhacken/Applied-CL/3_Systran/3_Systran.html#history)
+
+Jump to 2014:
+
+* [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/pdf/1409.3215) (12/2014)
+
+> For example, speech recognition and **machine translation are sequential
+> problems** [...] Bahdanau et al. [2] also attempted direct translations with
+> a neural network that used an **attention mechanism** to overcome the poor
+> performance on long sentences experienced by Cho et al. [5] and achieved
+> encouraging results. [...]
+
+Jump to 2026:
+
+* [translategemma](https://arxiv.org/pdf/2601.09012) (01/2026)
+* [tencent HY-MT1.5](https://arxiv.org/pdf/2512.24092) (12/2025)
+* [NLLB](https://huggingface.co/docs/transformers/en/model_doc/nllb),
+  [nllb-200-3.3B](https://huggingface.co/facebook/nllb-200-3.3B) ("Primary
+intended uses: NLLB-200 is a machine translation model primarily intended for
+research in machine translation, - especially for low-resource languages. It
+allows for single sentence translation among 200 languages.") (2022)
+* [Omnilingual MT: Machine Translation for 1,600 Languages](https://arxiv.org/pdf/2603.16309)
+* ...
+
+In general, specialized models can outperform generic models (but it is not required):
+
+>  Notably, all our 1B to 8B parameter models match or exceed the MT
+>  performance of a 70B LLM baseline, revealing a clear specialization
+>  advantage and enabling strong translation quality in low-compute settings --
+>  [Omnilingual MT](https://arxiv.org/pdf/2603.16309)
+
+Open Eval Dataset: [BOUQuET: dataset, Benchmark and Open initiative for
+Universal Quality Evaluation in Translation](https://arxiv.org/pdf/2502.04314)
+
+> [...] there have been several initiatives that called for data annotation in
+> a collaborative and open way, such as the translation data collection
+> initiative [...]
+
+### Finding models
+
+On HF, we find about 12K models under the *translation* tag.
 
 ![](static/screenshot-2026-05-18-220355-hf-tag-translation.png)
 
@@ -72,6 +119,22 @@ like: "Terminology Translation", "Context Translation", ...
 ### Evaluation
 
 * [WMT25](https://aclanthology.org/2025.wmt-1.22.pdf), "WMT25 General Machine Translation Shared Task"
+
+An approach to use a NN for evaluation of NN outputs. Also with translation:
+
+> We present COMET, a neural framework for training multilingual machine
+> translation evaluation models which obtains new state-of-the-art levels of
+> correlation with human judgements. -- [COMET: A Neural Framework for MT
+> Evaluation](https://aclanthology.org/2020.emnlp-main.213.pdf) (2020)
+
+In general, there is a technique called LLM-as-a-judge, or also human preference (arena).
+
+#### Vibe Checks
+
+> In my tests translating between Arabic <-> English and Korean -> English,
+> Gemma4 26B/31B is way better than translategemma, you should definitely
+> upgrade to that. --
+> [/r/LocalLLaMA/comments/1sl5k6d/comment/og4416d/](https://www.reddit.com/r/LocalLLaMA/comments/1sl5k6d/comment/og4416d/)
 
 ### Top 30 Models
 
