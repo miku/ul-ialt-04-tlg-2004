@@ -1,3 +1,4 @@
+
 Hardware 	The physical components of the computer (e.g. the hard drive, motherboard, monitor, etc.)
 Software 	The programs stored on the computer that the user interacts with.
 Operating system (OS) 	The software that interfaces between the computer's hardware and other user facing software. Common operating systems for desktop computers are Windows, macOS, and Linux. Common operating systems for mobile devices are iOS and Android.

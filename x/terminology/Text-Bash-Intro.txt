@@ -1,0 +1,15 @@
+Bash is a command language interpreter that executes commands read
+from the standard input, from a string, or from a file.  It is a
+reimplementation and extension of the Bourne shell, the historical
+Unix command language interpreter.  Bash also incorporates useful
+features from the Korn and C shells (ksh and csh).
+
+POSIX is the name for a family of computing standards based on
+Unix.  Bash is intended to be a conformant implementation of the
+Shell and Utilities portion of the IEEE POSIX specification (IEEE
+Standard 1003.1).  Bash POSIX mode (hereafter referred to as posix
+mode) changes the shell's behavior where its default operation
+differs from the standard to strictly conform to the standard.
+See SEE ALSO below for a reference to a document that details how
+posix mode affects bash's behavior.  Bash can be configured to be
+POSIX-conformant by default.
