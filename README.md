@@ -176,11 +176,6 @@ Wikipedia categories:
 
 Current wave: Neural machine translation ([NMT](https://en.wikipedia.org/wiki/Neural_machine_translation))
 
-> Neural machine translation is a recently proposed approach to machine
-> translation. Unlike the traditional statistical machine translation, the
-> neural machine translation aims at building a single neural network that can
-> be jointly tuned to maximize the translation performance. -- [NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE](https://arxiv.org/pdf/1409.0473) (05/2016)
-
 Jump to 2014:
 
 * [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/pdf/1409.3215) (12/2014)
@@ -190,6 +185,13 @@ Jump to 2014:
 > a neural network that used an **attention mechanism** to overcome the poor
 > performance on long sentences experienced by Cho et al. [5] and achieved
 > encouraging results. [...]
+
+Jump to 2016:
+
+> Neural machine translation is a recently proposed approach to machine
+> translation. Unlike the traditional statistical machine translation, the
+> neural machine translation aims at building a single neural network that can
+> be jointly tuned to maximize the translation performance. -- [NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE](https://arxiv.org/pdf/1409.0473) (05/2016)
 
 Jump to 2026:
 
