@@ -231,7 +231,7 @@ Universal Quality Evaluation in Translation](https://arxiv.org/pdf/2502.04314)
 
 ### Finding models
 
-On HF, we find about 12K models under the *translation* tag.
+On HF, we find about 12K models under the [*translation*](https://huggingface.co/models?pipeline_tag=translation) tag.
 
 ![](static/screenshot-2026-05-18-220355-hf-tag-translation.png)
 
