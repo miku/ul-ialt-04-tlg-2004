@@ -44,17 +44,18 @@ fast; very different speeds of adoption, wide variety of results:
 
 > How often do you reach to an LLM (or VLM, LMM, ...)?
 
-* daily use:
-* moderate:
-* never:
+* daily use: 2-3
+* moderate: 8-12
+* never: 0
 
 ### Most used tool and interaction mode
 
 > You tell me, there are many different combinations. Anything you like, or dislike?
 
-* ...
-
-
+* Perplexity, note summary
+* ChatGPT, website, app
+* Copilot, per button
+* Deepl
 
 ## What is a local LLM and how can I work with one?
 
