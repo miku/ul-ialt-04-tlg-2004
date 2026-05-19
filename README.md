@@ -239,6 +239,11 @@ Some noteable models:
 * [translategemma](https://blog.google/innovation-and-ai/technology/developers-tools/translategemma/) (01/2026)
 * tencent [HY-MT 1.5](https://arxiv.org/abs/2512.24092) (12/2025)
 
+Not available, fine-tuned from Qwen3 (which is available):
+
+* [qwen-mt](https://qwen.ai/blog?id=qwen-mt) (07/2025)
+
+
 Models come with prompt templates; used during training that are optimal for the task. Example prompt template for translategemma, from their [technical report](https://arxiv.org/pdf/2601.09012):
 
 > You are a professional {source_lang} ({src_lang_code}) to {target_lang}
@@ -293,7 +298,7 @@ Since 2026:
 Various options:
 
 * Prompting (add more context; note that translategemma has [only](https://huggingface.co/google/translategemma-4b-it/discussions/2) 2K context)
-* Agentic Translation
+* Agentic Translation (similar to agentic coding)
 
 Examples from HY-MT1.5:
 
@@ -304,4 +309,6 @@ Examples from HY-MT1.5:
 Unfortunately, the examples seem to be [in
 chinese](https://huggingface.co/tencent/HY-MT1.5-1.8B#prompts).
 
-But we can do some experiments with
+But we can do some experiments with generic models.
+
+
