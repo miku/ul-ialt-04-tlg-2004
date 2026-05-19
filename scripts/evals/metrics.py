@@ -92,6 +92,58 @@ def calculate_rouge_n(reference, candidate, n=1):
     matches = sum(1 for ngram in ref_ngrams if ngram in cand_ngrams)
     return matches / len(ref_ngrams)
 
+def calculate_chrf_plus(reference, candidate):
+    """
+    Simplified CHrF++ (Character n-gram F-score).
+    Calculates the F-score based on character n-grams.
+    The '++' typically refers to including word n-grams as well.
+    """
+    def get_char_ngrams(text, n):
+        return [text[i:i+n] for i in range(len(text)-n+1)]
+
+    def get_word_ngrams(text, n):
+        tokens = tokenize(text)
+        return [tuple(tokens[i:i+n]) for i in range(len(tokens)-n+1)]
+
+    # Character n-grams (typically 1-6)
+    char_matches = 0
+    char_total_ref = 0
+    char_total_cand = 0
+    
+    for n in range(1, 7):
+        ref_ngrams = collections.Counter(get_char_ngrams(reference, n))
+        cand_ngrams = collections.Counter(get_char_ngrams(candidate, n))
+        
+        for ngram, count in cand_ngrams.items():
+            char_matches += min(count, ref_ngrams[ngram])
+        
+        char_total_ref += len(get_char_ngrams(reference, n))
+        char_total_cand += len(get_char_ngrams(candidate, n))
+
+    # Word n-grams (typically 1-2) for the '++' part
+    word_matches = 0
+    word_total_ref = 0
+    word_total_cand = 0
+    
+    for n in range(1, 3):
+        ref_ngrams = collections.Counter(get_word_ngrams(reference, n))
+        cand_ngrams = collections.Counter(get_word_ngrams(candidate, n))
+        
+        for ngram, count in cand_ngrams.items():
+            word_matches += min(count, ref_ngrams[ngram])
+            
+        word_total_ref += len(get_word_ngrams(reference, n))
+        word_total_cand += len(get_word_ngrams(candidate, n))
+
+    precision = (char_matches + word_matches) / (char_total_cand + word_total_cand) if (char_total_cand + word_total_cand) > 0 else 0
+    recall = (char_matches + word_matches) / (char_total_ref + word_total_ref) if (char_total_ref + word_total_ref) > 0 else 0
+    
+    if precision + recall == 0:
+        return 0.0
+        
+    return (2 * precision * recall) / (precision + recall)
+
+
 def main():
     # Example cases
     test_cases = [
@@ -109,8 +161,8 @@ def main():
         },
     ]
 
-    print(f"{'Reference':<35} | {'Candidate':<35} | {'Jac':<6} | {'BLEU':<6} | {'ROUGE-1':<6}")
-    print("-" * 120)
+    print(f"{'Reference':<35} | {'Candidate':<35} | {'Jac':<6} | {'BLEU':<6} | {'ROUGE-1':<6} | {'CHrF++':<6}")
+    print("-" * 135)
 
     for case in test_cases:
         ref = case["ref"]
@@ -127,7 +179,10 @@ def main():
         # ROUGE-1
         rouge1 = calculate_rouge_n(ref, cand, n=1)
         
-        print(f"{ref:<35} | {cand:<35} | {jac:.3f} | {bleu:.3f} | {rouge1:.3f}")
+        # CHrF++
+        chrf = calculate_chrf_plus(ref, cand)
+        
+        print(f"{ref:<35} | {cand:<35} | {jac:.3f} | {bleu:.3f} | {rouge1:.3f} | {chrf:.3f}")
 
 if __name__ == "__main__":
     main()
