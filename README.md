@@ -38,10 +38,72 @@ fast; very different speeds of adoption, wide variety of results:
 > closer inspection, these codebases inevitably turn out to be more like
 > dancing elephants than useful engineering artifacts.
 
+## Before we start
+
+### Your LLM background
+
+> How often do you reach to an LLM (or VLM, LMM, ...)?
+
+* daily use: 
+* moderate: 
+* never: 
+
+### Most used tool and interaction mode
+
+> You tell me, there are many different combinations. Anything you like, or dislike?
+
+* ...
+
+
+
 ## What is a local LLM and how can I work with one?
 
-* what is an LLM? an llm is a file
-* example how you run them: you can download it, ollama, jan.ai, ...
+A local LLM (or any model) is also called open-weights. Given hardware, you can run it yourself.
+
+### Why Local Models
+
+* ownership vs renting
+* a level of autonomy, control, privacy, predictability and freedom
+
+[The Latent Role of Open Models in the AI
+Economy](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5767103) (2025),
+"Closed models dominate, with on average 80% of monthly LLM tokens using closed
+models despite much higher prices — on average 6x the price of open models —
+and only modest performance advantages"
+
+> This systematic underutilization
+is **economically significant**: reallocating demand from observably dominated
+closed models to superior open models would reduce average prices by over 70%
+and, when extrapolated to the total market, generate an **estimated $24.8
+billion in additional consumer savings across 2025**.
+
+### Why not
+
+* usually less capable models (fewer parameters, quantized)
+* you will need hardware (laptop, desktop), or access to hardware (server, data center)
+* if you start from scratch, a useful setup may cost between EUR 1-8K (and since EOY25 we additionally have a full on [RAM crisis](https://en.wikipedia.org/wiki/2024%E2%80%93present_global_memory_supply_shortage))
+* more initial setup, heterogeneous model landscape; early adopter pains
+
+Some consumer market machines in 2026:
+
+* [AMD Strix Halo APU](https://strixhalo.wiki/Guides/Buyer's_Guide) based
+  systems, [Mac mini](https://www.apple.com/de/mac-mini/), [Mac
+  Studio](https://www.apple.com/de/mac-studio/), anything with an [Nvidia
+  GPU](https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units)
+
+[![](static/i-made-a-true-to-scale-dimension-comparison-chart-of-every-v0-lvzixg09cyof1.webp)](https://www.reddit.com/r/MiniPCs/comments/1ng0p9r/i_made_a_truetoscale_dimension_comparison_chart/)
+
+Many models will run even on single board computers (e.g. raspberry pi, N150
+based boards, ...), but just slowly; cf. [can i run?](https://www.canirun.ai/)
+
+An example of performance regression caused by lower parameters counts
+([source](https://old.reddit.com/r/LocalLLaMA/comments/1ro7xve/qwen35_family_comparison_on_shared_benchmarks/)):
+
+![](static/krs0xrebcung1.png)
+
+A Strix Halo (128GB) box runs 122B-A10B (88GB) with PE/PP of 68/21 t/s.
+
+
 
 ## Are there local LLM specifically for translations?
 
