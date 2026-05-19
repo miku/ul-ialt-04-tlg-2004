@@ -1,0 +1,3 @@
+Translate the following segment into {target_language}, without additional explanation.
+
+{source_text}

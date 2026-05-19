@@ -12,3 +12,12 @@ A key feature of the program is that it regards any punctuation adjacent to a
 word as part of the word. That feature enables it to form sentences having a
 beginning and an end. Approximately half of them are even grammatical. I
 shudder to think what the program might produce after scanning this article!
+
+## HY-MT1.5
+
+
+```
+Translate the following segment into {target_language}, without additional explanation.
+
+{source_text}
+```

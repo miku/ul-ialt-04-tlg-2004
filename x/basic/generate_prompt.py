@@ -9,6 +9,8 @@ Usage:
     python gen_prompt.py --from german --to armenian
     echo "Hallo Welt" | python gen_prompt.py -f de -t en
     python gen_prompt.py -f de -t en input.txt
+    python gen_prompt.py -f de -t hy --model hy input.txt
+    python gen_prompt.py -f de -t en --model google input.txt
 """
 
 import argparse
@@ -207,15 +209,59 @@ _NAME_TO_CODE = {v.lower(): k for k, v in _ISO639_1.items()}
 # Also index by lowercase code for case-insensitive lookup
 _CODE_LOWER = {k.lower(): k for k in _ISO639_1}
 
-PROMPT_TEMPLATE = (
-    "You are a professional {source_lang} ({src_lang_code}) to {target_lang} "
-    "({tgt_lang_code}) translator. Your goal is to accurately convey the meaning "
-    "and nuances of the original {source_lang} text while adhering to "
-    "{target_lang} grammar, vocabulary, and cultural sensitivities. Produce only "
-    "the {target_lang} translation, without any additional explanations or "
-    "commentary. Please translate the following {source_lang} text into "
-    "{target_lang}:\n\n<<TEXT_PLACEHOLDER>>"
-)
+TEMPLATES = {
+    "translategemma": (
+        "You are a professional {source_lang} ({src_lang_code}) to {target_lang} "
+        "({tgt_lang_code}) translator. Your goal is to accurately convey the meaning "
+        "and nuances of the original {source_lang} text while adhering to "
+        "{target_lang} grammar, vocabulary, and cultural sensitivities. Produce only "
+        "the {target_lang} translation, without any additional explanations or "
+        "commentary. Please translate the following {source_lang} text into "
+        "{target_lang}:\n\n<<TEXT_PLACEHOLDER>>"
+    ),
+    "hy-mt-1.5": (
+        "Translate the following segment into {target_lang}, without additional "
+        "explanation.\n\n<<TEXT_PLACEHOLDER>>\n"
+    ),
+}
+
+# Optional aliases that map to a canonical template name.
+_MODEL_ALIASES = {
+    "google": "translategemma",
+    "gemma": "translategemma",
+}
+
+
+def resolve_template(model_input: str) -> str:
+    """Resolve a model prefix (or alias prefix) to a canonical template name."""
+    key = model_input.strip().lower()
+    if not key:
+        print("Error: --model value is empty.", file=sys.stderr)
+        sys.exit(1)
+
+    matches: set[str] = set()
+    for name in TEMPLATES:
+        if name.lower().startswith(key):
+            matches.add(name)
+    for alias, target in _MODEL_ALIASES.items():
+        if alias.startswith(key):
+            matches.add(target)
+
+    if len(matches) == 1:
+        return next(iter(matches))
+    if not matches:
+        print(
+            f"Error: no template matches '{model_input}'. "
+            f"Available: {', '.join(sorted(TEMPLATES))}.",
+            file=sys.stderr,
+        )
+    else:
+        print(
+            f"Error: ambiguous --model '{model_input}', matches: "
+            f"{', '.join(sorted(matches))}.",
+            file=sys.stderr,
+        )
+    sys.exit(1)
 
 
 def resolve_language(lang_input: str) -> tuple[str, str]:
@@ -246,10 +292,16 @@ def resolve_language(lang_input: str) -> tuple[str, str]:
 
 
 def build_prompt(
-    src_name: str, src_code: str, tgt_name: str, tgt_code: str, text: str
+    template_name: str,
+    src_name: str,
+    src_code: str,
+    tgt_name: str,
+    tgt_code: str,
+    text: str,
 ) -> str:
-    """Fill the prompt template with language info and the source text."""
-    result = PROMPT_TEMPLATE.format(
+    """Fill the chosen prompt template with language info and the source text."""
+    template = TEMPLATES[template_name]
+    result = template.format(
         source_lang=src_name,
         src_lang_code=src_code,
         target_lang=tgt_name,
@@ -297,6 +349,17 @@ def main() -> None:
         help="Target language (ISO 639-1 code or English name, e.g. 'en' or 'english')",
     )
     parser.add_argument(
+        "-m",
+        "--model",
+        dest="model",
+        default="translategemma",
+        help=(
+            "Template to use, matched by prefix against template names "
+            f"({', '.join(sorted(TEMPLATES))}) or aliases "
+            f"({', '.join(sorted(_MODEL_ALIASES))}). E.g. 'google', 'hy'."
+        ),
+    )
+    parser.add_argument(
         "file",
         nargs="?",
         default=None,
@@ -304,6 +367,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    template_name = resolve_template(args.model)
     src_name, src_code = resolve_language(args.source)
     tgt_name, tgt_code = resolve_language(args.target)
 
@@ -316,7 +380,9 @@ def main() -> None:
         if stdin_text is not None:
             text = stdin_text
 
-    prompt = build_prompt(src_name, src_code, tgt_name, tgt_code, text)
+    prompt = build_prompt(
+        template_name, src_name, src_code, tgt_name, tgt_code, text
+    )
     print(prompt)
 
 

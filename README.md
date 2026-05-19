@@ -44,9 +44,9 @@ fast; very different speeds of adoption, wide variety of results:
 
 > How often do you reach to an LLM (or VLM, LMM, ...)?
 
-* daily use: 
-* moderate: 
-* never: 
+* daily use:
+* moderate:
+* never:
 
 ### Most used tool and interaction mode
 
@@ -103,6 +103,59 @@ An example of performance regression caused by lower parameters counts
 
 A Strix Halo (128GB) box runs 122B-A10B (88GB) with PE/PP of 68/21 t/s.
 
+
+### Evaluations
+
+Capabilities are evaluated with benchmarks and benchmark datasets; examples:
+
+* GPQA
+* MMLU
+* MMLU-Pro
+* AIME 2025
+* MATH
+* HumanEval
+* MMMU
+* LiveCodeBench
+* IFEval
+* GSM8K
+* SWE-Bench Verified
+* and many more ...
+
+Benchmarks highlight particular aspects of language models.
+
+> A primary origin of over-hyped AI capabilities is the fact that many AI
+> systems are developed in sterile R&D environments and then deployed in more
+> complex real-world settings without appropriate testing or oversight. --
+> [Misrepresented Technological Solutions in Imagined Futures: The Origins and
+> Dangers of AI Hype in the Research
+> Community](https://arxiv.org/pdf/2408.15244)
+
+Leaderboards exists:
+
+* [LLM Leaderboard - Comparison of over 100 AI models from OpenAI, Google, DeepSeek & others](https://artificialanalysis.ai/leaderboards/models)
+* [https://llm-stats.com/](https://llm-stats.com/)
+* [https://onyx.app/llm-leaderboard](https://onyx.app/llm-leaderboard)
+
+Linguistic evals exits, but can also be combined.
+
+* [Best LLM for Translation in 2026: A Data-Driven Engine Scoreboard](https://alconost.com/en/blog/best-llm-for-translation-2026)
+
+> We ran 5,632 machine-translation evaluations on real client projects in 2025 and 2026.
+
+They create an index from various benchmarks, including manual review ("LE", "linguist evaluation"):
+
+> * COMET (30%): a neural framework that correlates strongly with human judgment.
+> * LE, Linguist Evaluation (20%): a 0 to 100 score given by a professional native-speaker linguist. Always present in our calculation.
+> * nTER (15%): edit-distance metric that reflects post-editing effort.
+> * BERTscore (15%): contextual similarity using transformer embeddings.
+> * BLEU (10%): the historic n-gram precision metric, intentionally down-weighted because surface overlap is a known weak signal in 2026.
+> * CHrF++ (5%): character n-gram metric, useful for morphologically rich languages.
+> * COMET-QE / CometKiwi (5%): reference-free quality estimation.
+
+[![](static/chart-language-heatmap.png)](https://alconost.com/en/blog/best-llm-for-translation-2026)
+
+Note: it would be great to run these benchmarks across smaller, specialized
+models, maybe with additional parameters, etc.
 
 
 ## Are there local LLM specifically for translations?
@@ -237,6 +290,18 @@ Since 2026:
 
 ## How does context influence translations quality?
 
-* Prompting
+Various options:
+
+* Prompting (add more context; note that translategemma has [only](https://huggingface.co/google/translategemma-4b-it/discussions/2) 2K context)
 * Agentic Translation
 
+Examples from HY-MT1.5:
+
+* Scenario 1: Terminology Translation
+* Scenario 2: Context Translation
+* Scenario 3: Format Translation
+
+Unfortunately, the examples seem to be [in
+chinese](https://huggingface.co/tencent/HY-MT1.5-1.8B#prompts).
+
+But we can do some experiments with
