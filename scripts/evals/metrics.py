@@ -5,6 +5,7 @@ Implemented in pure Python without external dependencies.
 """
 
 import collections
+import math
 import re
 import sys
 
@@ -71,7 +72,7 @@ def calculate_bleu(reference, candidate):
     # Brevity Penalty
     r = len(ref_tokens)
     c = len(cand_tokens)
-    bp = 1.0 if c >= r else (2.718281828459 ** (1 - r/c))
+    bp = 1.0 if c >= r else math.exp(1 - r/c)
 
     return bp * geom_mean
 
@@ -84,19 +85,23 @@ def calculate_rouge_n(reference, candidate, n=1):
     cand_tokens = tokenize(candidate)
     
     ref_ngrams = n_grams(ref_tokens, n)
-    cand_ngrams = set(n_grams(cand_tokens, n))
-    
+    cand_ngrams = n_grams(cand_tokens, n)
+
     if not ref_ngrams:
         return 0.0
-        
-    matches = sum(1 for ngram in ref_ngrams if ngram in cand_ngrams)
+
+    ref_counts = collections.Counter(ref_ngrams)
+    cand_counts = collections.Counter(cand_ngrams)
+
+    # Clipped matching: a candidate ngram can only be credited up to its count in the reference.
+    matches = sum(min(count, cand_counts[ngram]) for ngram, count in ref_counts.items())
     return matches / len(ref_ngrams)
 
-def calculate_chrf_plus(reference, candidate):
+def calculate_chrf_plus(reference, candidate, beta=2):
     """
     Simplified CHrF++ (Character n-gram F-score).
-    Calculates the F-score based on character n-grams.
-    The '++' typically refers to including word n-grams as well.
+    Computes F-beta over character n-grams (1-6) and word n-grams (1-2) separately,
+    then averages. Beta=2 matches Popović's chrF / chrF++ definition (recall-weighted).
     """
     def get_char_ngrams(text, n):
         return [text[i:i+n] for i in range(len(text)-n+1)]
@@ -105,43 +110,32 @@ def calculate_chrf_plus(reference, candidate):
         tokens = tokenize(text)
         return [tuple(tokens[i:i+n]) for i in range(len(tokens)-n+1)]
 
-    # Character n-grams (typically 1-6)
-    char_matches = 0
-    char_total_ref = 0
-    char_total_cand = 0
-    
-    for n in range(1, 7):
-        ref_ngrams = collections.Counter(get_char_ngrams(reference, n))
-        cand_ngrams = collections.Counter(get_char_ngrams(candidate, n))
-        
-        for ngram, count in cand_ngrams.items():
-            char_matches += min(count, ref_ngrams[ngram])
-        
-        char_total_ref += len(get_char_ngrams(reference, n))
-        char_total_cand += len(get_char_ngrams(candidate, n))
+    def f_beta(matches, total_cand, total_ref):
+        if total_cand == 0 or total_ref == 0:
+            return 0.0
+        p = matches / total_cand
+        r = matches / total_ref
+        if p + r == 0:
+            return 0.0
+        b2 = beta * beta
+        return (1 + b2) * p * r / (b2 * p + r)
 
-    # Word n-grams (typically 1-2) for the '++' part
-    word_matches = 0
-    word_total_ref = 0
-    word_total_cand = 0
-    
-    for n in range(1, 3):
-        ref_ngrams = collections.Counter(get_word_ngrams(reference, n))
-        cand_ngrams = collections.Counter(get_word_ngrams(candidate, n))
-        
-        for ngram, count in cand_ngrams.items():
-            word_matches += min(count, ref_ngrams[ngram])
-            
-        word_total_ref += len(get_word_ngrams(reference, n))
-        word_total_cand += len(get_word_ngrams(candidate, n))
+    def ngram_f(ngram_fn, ns):
+        # Average F-beta across the n-gram orders in `ns`.
+        scores = []
+        for n in ns:
+            ref_ngrams = ngram_fn(reference, n)
+            cand_ngrams = ngram_fn(candidate, n)
+            ref_counts = collections.Counter(ref_ngrams)
+            cand_counts = collections.Counter(cand_ngrams)
+            matches = sum(min(c, ref_counts[g]) for g, c in cand_counts.items())
+            scores.append(f_beta(matches, len(cand_ngrams), len(ref_ngrams)))
+        return sum(scores) / len(scores) if scores else 0.0
 
-    precision = (char_matches + word_matches) / (char_total_cand + word_total_cand) if (char_total_cand + word_total_cand) > 0 else 0
-    recall = (char_matches + word_matches) / (char_total_ref + word_total_ref) if (char_total_ref + word_total_ref) > 0 else 0
-    
-    if precision + recall == 0:
-        return 0.0
-        
-    return (2 * precision * recall) / (precision + recall)
+    char_f = ngram_f(get_char_ngrams, range(1, 7))
+    word_f = ngram_f(get_word_ngrams, range(1, 3))
+
+    return (char_f + word_f) / 2
 
 
 def main():
