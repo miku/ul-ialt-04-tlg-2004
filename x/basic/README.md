@@ -1,6 +1,10 @@
 # Basic translation
 
+Many language models will translate, if you instruct them to in a generic way.
+
 From: [Computer Recreations - Markov Chainer - Scientific American](https://archive.org/details/ComputerRecreationsMarkovChainer/page/n1/mode/2up) (1988)
+
+----
 
 The trick is to apply Shannon's algorithm for Markov chains but with entire
 words instead of characters as the concatenated symbols. As Mark V. Shaney
@@ -13,11 +17,6 @@ word as part of the word. That feature enables it to form sentences having a
 beginning and an end. Approximately half of them are even grammatical. I
 shudder to think what the program might produce after scanning this article!
 
-## HY-MT1.5
+----
 
-
-```
-Translate the following segment into {target_language}, without additional explanation.
-
-{source_text}
-```
+For you: paste the prompt into one of the Academic Cloud models.
