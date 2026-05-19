@@ -245,7 +245,7 @@ Not available, fine-tuned from Qwen3 (which is available):
 * [qwen-mt](https://qwen.ai/blog?id=qwen-mt) (07/2025)
 
 
-Models come with prompt templates; used during training that are optimal for the task. Example prompt template for translategemma, from their [technical report](https://arxiv.org/pdf/2601.09012):
+Models come with prompt templates; used during training that are optimal for the task. Example prompt template for translategemma, from their [technical report](https://arxiv.org/pdf/2601.09012#page=6):
 
 > You are a professional {source_lang} ({src_lang_code}) to {target_lang}
 > ({tgt_lang_code}) translator. Your goal is to accurately convey the meaning
