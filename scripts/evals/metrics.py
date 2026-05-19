@@ -97,6 +97,37 @@ def calculate_rouge_n(reference, candidate, n=1):
     matches = sum(min(count, cand_counts[ngram]) for ngram, count in ref_counts.items())
     return matches / len(ref_ngrams)
 
+def edit_distance(a, b):
+    """Standard Levenshtein distance with insert/delete/substitute cost 1."""
+    if not a:
+        return len(b)
+    if not b:
+        return len(a)
+    prev = list(range(len(b) + 1))
+    for i, x in enumerate(a, 1):
+        curr = [i]
+        for j, y in enumerate(b, 1):
+            cost = 0 if x == y else 1
+            curr.append(min(curr[j-1] + 1, prev[j] + 1, prev[j-1] + cost))
+        prev = curr
+    return prev[-1]
+
+
+def calculate_nter(reference, candidate):
+    """
+    Normalized Translation Edit Rate (simplified).
+    Token-level Levenshtein (insert/delete/substitute) divided by reference length.
+    Proper TER also credits shift operations via a greedy heuristic; omitting them
+    makes this effectively WER. Lower is better; 0.0 is perfect, >=1.0 means the
+    candidate needs as many edits as the reference has tokens.
+    """
+    ref = tokenize(reference)
+    cand = tokenize(candidate)
+    if not ref:
+        return 0.0 if not cand else 1.0
+    return edit_distance(ref, cand) / len(ref)
+
+
 def calculate_chrf_plus(reference, candidate, beta=2):
     """
     Simplified CHrF++ (Character n-gram F-score).
@@ -155,28 +186,22 @@ def main():
         },
     ]
 
-    print(f"{'Reference':<35} | {'Candidate':<35} | {'Jac':<6} | {'BLEU':<6} | {'ROUGE-1':<6} | {'CHrF++':<6}")
-    print("-" * 135)
+    print(f"{'Reference':<35} | {'Candidate':<35} | {'Jac':<6} | {'BLEU':<6} | {'ROUGE-1':<6} | {'CHrF++':<6} | {'nTER':<6}")
+    print("-" * 144)
 
     for case in test_cases:
         ref = case["ref"]
         cand = case["cand"]
-        
-        # Jaccard
+
         set_ref = set(tokenize(ref))
         set_cand = set(tokenize(cand))
         jac = jaccard_similarity(set_ref, set_cand)
-        
-        # BLEU
         bleu = calculate_bleu(ref, cand)
-        
-        # ROUGE-1
         rouge1 = calculate_rouge_n(ref, cand, n=1)
-        
-        # CHrF++
         chrf = calculate_chrf_plus(ref, cand)
-        
-        print(f"{ref:<35} | {cand:<35} | {jac:.3f} | {bleu:.3f} | {rouge1:.3f} | {chrf:.3f}")
+        nter = calculate_nter(ref, cand)
+
+        print(f"{ref:<35} | {cand:<35} | {jac:.3f} | {bleu:.3f} | {rouge1:.3f} | {chrf:.3f} | {nter:.3f}")
 
 if __name__ == "__main__":
     main()
