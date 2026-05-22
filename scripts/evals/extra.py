@@ -4,6 +4,8 @@
 # requires-python = ">=3.12"
 # dependencies = [
 #   "unbabel-comet>=2.2",
+#   "litlogger",
+#   "litmodels",
 # ]
 # ///
 """
@@ -44,6 +46,7 @@ http://localhost:11434/v1 out of the box. Override via --base-url or OPENAI_BASE
 """
 
 import argparse
+import datetime
 import hashlib
 import json
 import math
@@ -76,10 +79,15 @@ WEIGHTS = {
     "comet_qe": 0.05,
 }
 
+import warnings
+
+warnings.filterwarnings("ignore", module="torchmetrics")
+
 
 # ---------------------------------------------------------------------------
 # Cache + IO
 # ---------------------------------------------------------------------------
+
 
 def cache_dir(override=None):
     if override:
@@ -110,7 +118,9 @@ def _cache_path(model, text, root):
 def atomic_write_json(path: Path, data):
     """Write JSON atomically: tmp file in same dir, fsync, os.replace."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    fd, tmp_name = tempfile.mkstemp(prefix=".tmp-", suffix=".json", dir=str(path.parent))
+    fd, tmp_name = tempfile.mkstemp(
+        prefix=".tmp-", suffix=".json", dir=str(path.parent)
+    )
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as f:
             json.dump(data, f)
@@ -128,6 +138,7 @@ def atomic_write_json(path: Path, data):
 # ---------------------------------------------------------------------------
 # Embeddings
 # ---------------------------------------------------------------------------
+
 
 def _fetch_embedding(text, model, base_url, api_key, timeout):
     url = f"{base_url.rstrip('/')}/embeddings"
@@ -168,8 +179,16 @@ def _fetch_embedding(text, model, base_url, api_key, timeout):
         ) from e
 
 
-def get_embedding(text, model, base_url, api_key=None, timeout=60,
-                  cache_root=None, no_cache=False, verbose=False):
+def get_embedding(
+    text,
+    model,
+    base_url,
+    api_key=None,
+    timeout=60,
+    cache_root=None,
+    no_cache=False,
+    verbose=False,
+):
     if not no_cache:
         path = _cache_path(model, text, cache_root)
         if path.exists():
@@ -209,6 +228,7 @@ def _tokenize(text):
 # BERTscore-style metrics (embedding-based)
 # ---------------------------------------------------------------------------
 
+
 def bertscore_sentence_cosine(reference, candidate, **emb_kw):
     """Coarse: cosine sim of full-sentence embeddings."""
     er = get_embedding(reference, **emb_kw)
@@ -231,7 +251,9 @@ def bertscore_token_greedy(reference, candidate, **emb_kw):
         return 0.0
     ref_emb = [get_embedding(t, **emb_kw) for t in ref_toks]
     cand_emb = [get_embedding(t, **emb_kw) for t in cand_toks]
-    precision = sum(max(cosine(c, r) for r in ref_emb) for c in cand_emb) / len(cand_emb)
+    precision = sum(max(cosine(c, r) for r in ref_emb) for c in cand_emb) / len(
+        cand_emb
+    )
     recall = sum(max(cosine(r, c) for c in cand_emb) for r in ref_emb) / len(ref_emb)
     if precision + recall <= 0:
         return 0.0
@@ -257,6 +279,22 @@ def _get_comet_model(model_name):
             "unbabel-comet not installed. With `uv run --script` this should happen "
             "automatically; otherwise: pip install unbabel-comet"
         ) from e
+    # Unbabel ships checkpoints saved with Lightning v1.8.x; v2.x migrates them in
+    # memory on load and logs an info message. The "fix" would mutate HF's
+    # content-addressed cache — silence the logger instead.
+    import logging
+    import warnings
+    # Bump the whole Lightning logger tree past INFO. Kills the migration notice, the
+    # "GPU available" / "TPU available" lines, and the promotional "💡 Tip:" messages
+    # for litlogger / litmodels — all emitted via rank_zero_info at INFO level.
+    for name in ("pytorch_lightning", "lightning", "lightning.pytorch",
+                 "lightning_fabric", "lightning_utilities"):
+        logging.getLogger(name).setLevel(logging.WARNING)
+    # pytorch_lightning._pytree uses an API torch deprecated; harmless until they bump.
+    warnings.filterwarnings(
+        "ignore",
+        message=r".*isinstance\(treespec, LeafSpec\).*",
+    )
     ckpt = comet.download_model(model_name)
     model = comet.load_from_checkpoint(ckpt)
     _COMET_MODELS[model_name] = model
@@ -270,29 +308,38 @@ def _comet_predict(data, model_name, gpus, batch_size):
     return float(out.scores[0])
 
 
-def comet_score(source, reference, candidate, model=DEFAULT_COMET_MODEL,
-                gpus=0, batch_size=8):
+def comet_score(
+    source, reference, candidate, model=DEFAULT_COMET_MODEL, gpus=0, batch_size=8
+):
     if not source:
-        raise RuntimeError("COMET requires a 'source' field (the original sentence).")
+        raise RuntimeError("COMET requires a 'src' field (the original sentence).")
     return _comet_predict(
         [{"src": source, "mt": candidate, "ref": reference}],
-        model_name=model, gpus=gpus, batch_size=batch_size,
+        model_name=model,
+        gpus=gpus,
+        batch_size=batch_size,
     )
 
 
-def comet_qe_score(source, candidate, model=DEFAULT_COMET_QE_MODEL,
-                   gpus=0, batch_size=8):
+def comet_qe_score(
+    source, candidate, model=DEFAULT_COMET_QE_MODEL, gpus=0, batch_size=8
+):
     if not source:
-        raise RuntimeError("COMET-QE requires a 'source' field (the original sentence).")
+        raise RuntimeError(
+            "COMET-QE requires a 'src' field (the original sentence)."
+        )
     return _comet_predict(
         [{"src": source, "mt": candidate}],
-        model_name=model, gpus=gpus, batch_size=batch_size,
+        model_name=model,
+        gpus=gpus,
+        batch_size=batch_size,
     )
 
 
 # ---------------------------------------------------------------------------
 # Combined score
 # ---------------------------------------------------------------------------
+
 
 def combine_metrics(scores, weights=WEIGHTS):
     """Weighted average over only the metrics actually present in `scores`,
@@ -316,9 +363,20 @@ def combine_metrics(scores, weights=WEIGHTS):
 # Pair-level evaluation
 # ---------------------------------------------------------------------------
 
-def evaluate_pair(ref, cand, *, source=None, le=None,
-                  selected, emb_kw, bertscore_mode,
-                  comet_model, comet_qe_model, comet_gpus):
+
+def evaluate_pair(
+    ref,
+    cand,
+    *,
+    source=None,
+    le=None,
+    selected,
+    emb_kw,
+    bertscore_mode,
+    comet_model,
+    comet_qe_model,
+    comet_gpus,
+):
     """Compute the requested metrics for a single (ref, cand) pair.
 
     `selected` is a set of metric names. `le` is the optional human linguist score
@@ -338,9 +396,13 @@ def evaluate_pair(ref, cand, *, source=None, le=None,
         else:
             out["bertscore"] = bertscore_sentence_cosine(ref, cand, **emb_kw)
     if "comet" in selected:
-        out["comet"] = comet_score(source, ref, cand, model=comet_model, gpus=comet_gpus)
+        out["comet"] = comet_score(
+            source, ref, cand, model=comet_model, gpus=comet_gpus
+        )
     if "comet_qe" in selected:
-        out["comet_qe"] = comet_qe_score(source, cand, model=comet_qe_model, gpus=comet_gpus)
+        out["comet_qe"] = comet_qe_score(
+            source, cand, model=comet_qe_model, gpus=comet_gpus
+        )
     if le is not None:
         out["le"] = le / 100.0  # normalize human 0-100 to 0-1
 
@@ -356,11 +418,15 @@ ALL_METRICS = ("bleu", "chrf_plus", "nter", "bertscore", "comet", "comet_qe")
 
 
 def _load_pairs(args):
-    """Yield dicts with at least 'ref' and 'cand'. Sources: --reference/--candidate,
-    --input JSONL, or stdin JSONL."""
+    """Yield dicts with at least 'ref' and 'mt'. Sources: --reference/--candidate,
+    --input JSONL, or stdin JSONL. Canonical keys are COMET-style: src / mt / ref."""
     if args.reference is not None and args.candidate is not None:
-        yield {"ref": args.reference, "cand": args.candidate,
-               "source": args.source, "le": args.le}
+        yield {
+            "ref": args.reference,
+            "mt": args.candidate,
+            "src": args.source,
+            "le": args.le,
+        }
         return
 
     stream = open(args.input, encoding="utf-8") if args.input else sys.stdin
@@ -374,14 +440,17 @@ def _load_pairs(args):
             except json.JSONDecodeError as e:
                 print(f"[warn] skipping line {lineno}: {e}", file=sys.stderr)
                 continue
-            # Accept COMET-style aliases: src -> source, mt -> cand.
-            if "source" not in rec and "src" in rec:
-                rec["source"] = rec["src"]
-            if "cand" not in rec and "mt" in rec:
-                rec["cand"] = rec["mt"]
-            if "ref" not in rec or "cand" not in rec:
-                print(f"[warn] line {lineno} missing 'ref'/'cand' (or 'mt'), skipping",
-                      file=sys.stderr)
+            # Accept long-form aliases: source -> src, cand -> mt. Pop so the alias
+            # doesn't survive into the output record alongside the canonical key.
+            if "source" in rec:
+                rec.setdefault("src", rec.pop("source"))
+            if "cand" in rec:
+                rec.setdefault("mt", rec.pop("cand"))
+            if "ref" not in rec or "mt" not in rec:
+                print(
+                    f"[warn] line {lineno} missing 'ref'/'mt' (or 'cand'), skipping",
+                    file=sys.stderr,
+                )
                 continue
             yield rec
     finally:
@@ -397,29 +466,47 @@ def main(argv=None):
     # Input modes
     p.add_argument("--reference", "-r", help="Reference translation (one-shot mode).")
     p.add_argument("--candidate", "-c", help="Candidate translation (one-shot mode).")
-    p.add_argument("--source", "-s", help="Source sentence (needed for COMET/COMET-QE).")
-    p.add_argument("--le", type=float, help="Linguist Evaluation score 0-100 (one-shot).")
-    p.add_argument("--input", "-i", help="JSONL file with {ref, cand, [source, le]} per line.")
+    p.add_argument(
+        "--source", "-s", help="Source sentence (needed for COMET/COMET-QE)."
+    )
+    p.add_argument(
+        "--le", type=float, help="Linguist Evaluation score 0-100 (one-shot)."
+    )
+    p.add_argument(
+        "--input", "-i", help="JSONL file with {ref, cand, [source, le]} per line."
+    )
 
     # Metric selection
     p.add_argument(
-        "--metrics", "-m", default="bleu,chrf_plus,nter,bertscore",
+        "--metrics",
+        "-m",
+        default="bleu,chrf_plus,nter,bertscore",
         help=f"Comma-separated subset of {ALL_METRICS} or 'all'. "
-             "COMET/COMET-QE are off by default because they need the comet-score binary.",
+        "COMET/COMET-QE are off by default because they need the comet-score binary.",
     )
     p.add_argument(
-        "--bertscore-mode", choices=("sentence-cosine", "token-greedy"),
+        "--bertscore-mode",
+        choices=("sentence-cosine", "token-greedy"),
         default="sentence-cosine",
         help="How to approximate BERTscore via the embeddings API.",
     )
 
     # Embedding endpoint
-    p.add_argument("--model", default=DEFAULT_MODEL,
-                   help="Embedding model name (default: %(default)s).")
-    p.add_argument("--base-url", default=DEFAULT_BASE_URL,
-                   help="OpenAI-compatible base URL (default: %(default)s).")
-    p.add_argument("--api-key", default=os.environ.get("OPENAI_API_KEY"),
-                   help="API key. Defaults to $OPENAI_API_KEY. 'dummy' is fine for Ollama.")
+    p.add_argument(
+        "--model",
+        default=DEFAULT_MODEL,
+        help="Embedding model name (default: %(default)s).",
+    )
+    p.add_argument(
+        "--base-url",
+        default=DEFAULT_BASE_URL,
+        help="OpenAI-compatible base URL (default: %(default)s).",
+    )
+    p.add_argument(
+        "--api-key",
+        default=os.environ.get("OPENAI_API_KEY"),
+        help="API key. Defaults to $OPENAI_API_KEY. 'dummy' is fine for Ollama.",
+    )
     p.add_argument("--timeout", type=float, default=60.0)
 
     # COMET endpoints
@@ -432,7 +519,9 @@ def main(argv=None):
     p.add_argument("--no-cache", action="store_true", help="Disable embedding cache.")
 
     # Output
-    p.add_argument("--output", "-o", help="Write JSONL results here. Defaults to stdout.")
+    p.add_argument(
+        "--output", "-o", help="Write JSONL results here. Defaults to stdout."
+    )
     p.add_argument("--verbose", "-v", action="store_true")
 
     args = p.parse_args(argv)
@@ -459,17 +548,36 @@ def main(argv=None):
         verbose=args.verbose,
     )
 
+    # Provenance for the output: which models/params produced these scores.
+    # Only include keys relevant to the selected metrics.
+    meta_base = {
+        "metrics": sorted(selected),
+        "weights": {k: WEIGHTS[k] for k in sorted(selected) if k in WEIGHTS},
+    }
+    if "bertscore" in selected:
+        meta_base["embedding_model"] = args.model
+        meta_base["embedding_base_url"] = args.base_url
+        meta_base["bertscore_mode"] = args.bertscore_mode
+    if "comet" in selected:
+        meta_base["comet_model"] = args.comet_model
+    if "comet_qe" in selected:
+        meta_base["comet_qe_model"] = args.comet_qe_model
+
     out_stream = open(args.output, "w", encoding="utf-8") if args.output else sys.stdout
     try:
         for rec in _load_pairs(args):
-            if needs_source and not rec.get("source"):
-                print(f"[warn] skipping pair (missing 'source' required by {needs_source}): "
-                      f"{rec.get('ref','')[:50]!r}", file=sys.stderr)
+            if needs_source and not rec.get("src"):
+                print(
+                    f"[warn] skipping pair (missing 'src' required by {needs_source}): "
+                    f"{rec.get('ref', '')[:50]!r}",
+                    file=sys.stderr,
+                )
                 continue
             try:
                 scores = evaluate_pair(
-                    rec["ref"], rec["cand"],
-                    source=rec.get("source"),
+                    rec["ref"],
+                    rec["mt"],
+                    source=rec.get("src"),
                     le=rec.get("le"),
                     selected=selected,
                     emb_kw=emb_kw,
@@ -481,7 +589,9 @@ def main(argv=None):
             except (urlerror.URLError, RuntimeError) as e:
                 print(f"[error] {e}", file=sys.stderr)
                 scores = {"error": str(e)}
-            out_rec = {**rec, "scores": scores}
+            meta = {**meta_base,
+                    "timestamp": datetime.datetime.now(datetime.UTC).isoformat()}
+            out_rec = {**rec, "scores": scores, "meta": meta}
             out_stream.write(json.dumps(out_rec, ensure_ascii=False) + "\n")
             out_stream.flush()
     finally:
