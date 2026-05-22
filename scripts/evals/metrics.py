@@ -7,7 +7,6 @@ Implemented in pure Python without external dependencies.
 import collections
 import math
 import re
-import sys
 
 def tokenize(text):
     """Simple whitespace and punctuation tokenizer."""

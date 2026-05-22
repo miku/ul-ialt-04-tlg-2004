@@ -51,7 +51,6 @@ import hashlib
 import json
 import math
 import os
-import re
 import sys
 import tempfile
 from pathlib import Path
@@ -220,10 +219,6 @@ def cosine(a, b):
     return dot / (na * nb)
 
 
-def _tokenize(text):
-    return re.findall(r"\w+", text.lower())
-
-
 # ---------------------------------------------------------------------------
 # BERTscore-style metrics (embedding-based)
 # ---------------------------------------------------------------------------
@@ -245,8 +240,8 @@ def bertscore_token_greedy(reference, candidate, **emb_kw):
     API each token is embedded in isolation, so this is closer to a static-word-vector
     F1 than to the paper. Useful as a sanity signal, not as a published number.
     """
-    ref_toks = _tokenize(reference)
-    cand_toks = _tokenize(candidate)
+    ref_toks = surface_metrics.tokenize(reference)
+    cand_toks = surface_metrics.tokenize(candidate)
     if not ref_toks or not cand_toks:
         return 0.0
     ref_emb = [get_embedding(t, **emb_kw) for t in ref_toks]
@@ -283,7 +278,6 @@ def _get_comet_model(model_name):
     # memory on load and logs an info message. The "fix" would mutate HF's
     # content-addressed cache — silence the logger instead.
     import logging
-    import warnings
     # Bump the whole Lightning logger tree past INFO. Kills the migration notice, the
     # "GPU available" / "TPU available" lines, and the promotional "💡 Tip:" messages
     # for litlogger / litmodels — all emitted via rank_zero_info at INFO level.
@@ -518,7 +512,8 @@ def main(argv=None):
         "-m",
         default="bleu,chrf_plus,nter,bertscore",
         help=f"Comma-separated subset of {ALL_METRICS} or 'all'. "
-        "COMET/COMET-QE are off by default because they need the comet-score binary.",
+        "COMET/COMET-QE are off by default because loading the model is heavy "
+        "(a few GB; first run downloads from HF).",
     )
     p.add_argument(
         "--bertscore-mode",
