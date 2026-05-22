@@ -44,7 +44,7 @@ Ollama out of the box) and combines all seven into a single weighted
 `combined` score. Uses `uv run --script` so dependencies install on first run.
 
 ```shell
-$ ./extra.py --metrics all --model nomic-embed-text:latest --input example.jsonl --format markdown
+$ ./extra.py --metrics all --model nomic-embed-text:latest --input sample.jsonl --format markdown
 ```
 
 | src | mt | ref | bleu | chrf_plus | nter | bertscore | comet | comet_qe | combined |
