@@ -417,6 +417,42 @@ def evaluate_pair(
 ALL_METRICS = ("bleu", "chrf_plus", "nter", "bertscore", "comet", "comet_qe")
 
 
+def _truncate(s, n=40):
+    s = str(s).replace("\n", " ")
+    return s if len(s) <= n else s[: n - 1] + "…"
+
+
+def _emit_markdown(records, selected, stream):
+    """Render buffered results as a single GitHub-flavored markdown table."""
+    if not records:
+        stream.write("_no records_\n")
+        return
+    # Metric columns in canonical display order, then 'combined'.
+    metric_cols = [m for m in ALL_METRICS if m in selected] + ["combined"]
+    # Auto-include passthrough fields if every record has them. Common ones from
+    # the ort_wmt sample: 'system', 'human_score'.
+    extras = [k for k in ("system", "human_score")
+              if all(k in r for r in records)]
+
+    headers = ["src", "mt", "ref", *extras, *metric_cols]
+    stream.write("| " + " | ".join(headers) + " |\n")
+    stream.write("|" + "|".join(["---"] * len(headers)) + "|\n")
+    for r in records:
+        scores = r.get("scores", {})
+        row = [
+            _truncate(r.get("src", "")),
+            _truncate(r.get("mt", "")),
+            _truncate(r.get("ref", "")),
+        ]
+        for k in extras:
+            v = r.get(k)
+            row.append(f"{v:.3f}" if isinstance(v, float) else str(v))
+        for m in metric_cols:
+            v = scores.get(m)
+            row.append("" if v is None else f"{v:.3f}")
+        stream.write("| " + " | ".join(row) + " |\n")
+
+
 def _load_pairs(args):
     """Yield dicts with at least 'ref' and 'mt'. Sources: --reference/--candidate,
     --input JSONL, or stdin JSONL. Canonical keys are COMET-style: src / mt / ref."""
@@ -520,7 +556,12 @@ def main(argv=None):
 
     # Output
     p.add_argument(
-        "--output", "-o", help="Write JSONL results here. Defaults to stdout."
+        "--output", "-o", help="Write results here. Defaults to stdout."
+    )
+    p.add_argument(
+        "--format", "-f", choices=("jsonl", "markdown"), default="jsonl",
+        help="Output format. 'markdown' buffers all records and emits a single "
+             "table at the end (no streaming).",
     )
     p.add_argument("--verbose", "-v", action="store_true")
 
@@ -564,6 +605,7 @@ def main(argv=None):
         meta_base["comet_qe_model"] = args.comet_qe_model
 
     out_stream = open(args.output, "w", encoding="utf-8") if args.output else sys.stdout
+    buffered = []  # used only for --format=markdown
     try:
         for rec in _load_pairs(args):
             if needs_source and not rec.get("src"):
@@ -592,8 +634,13 @@ def main(argv=None):
             meta = {**meta_base,
                     "timestamp": datetime.datetime.now(datetime.UTC).isoformat()}
             out_rec = {**rec, "scores": scores, "meta": meta}
-            out_stream.write(json.dumps(out_rec, ensure_ascii=False) + "\n")
-            out_stream.flush()
+            if args.format == "jsonl":
+                out_stream.write(json.dumps(out_rec, ensure_ascii=False) + "\n")
+                out_stream.flush()
+            else:
+                buffered.append(out_rec)
+        if args.format == "markdown":
+            _emit_markdown(buffered, selected, out_stream)
     finally:
         if out_stream is not sys.stdout:
             out_stream.close()
