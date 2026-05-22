@@ -1,0 +1,2203 @@
+   Link: canonical
+   Link: alternate en
+   Alconost
+   Services
+
+    Translation & Localization
+
+   360° Localization Full-stack localization
+   Software & Product Localization
+   Marketing & Content Translation SEO, ads, SMM
+   Game Localization
+   Website Localization
+   24/7 On-Demand Human Translation Nitro®
+
+    Media & DTP
+
+   Audio & Video Localization Transcribing, subtitling
+   Desktop Publishing
+
+    Quality & Process
+
+   Service Levels & Pricing Languages, project planning, workflows
+   Machine Translation Post-Editing (MTPE) Human and AI
+   Localization Testing & QA Functional, linguistic, cultural
+   Localization QA
+   Proofreading & Editing
+   Cultural Analysis
+   Vendor Management Outstaffing, full-stack teams, mixed
+   Asset Management Glossaries, TM, style guides
+
+    AI Services
+
+   AI/LLM-Powered Translation
+   AI Translation Quality Control
+   AI Data Services Datasets, text, speech & audio labeling
+   Our Work
+
+    By Platform
+
+   Mobile ^78 iOS & Android
+   Web Apps ^45
+   Desktop Software ^35
+   PC Gaming ^13 Steam, Epic, GOG
+   Game Consoles ^9 PlayStation, Xbox, Nintendo
+
+    By Content Type
+
+   UI/Software Strings ^152
+   Game Content ^55 Dialogue, quests, items
+   Video & Audio ^12 Subtitles, voiceover
+   E-commerce ^5 Product listings, catalogs
+   Technical Documentation ^1 Manuals, API docs
+   Marketing & Web ^1 Ads, SEO, websites
+   Support ^1 Help center, KB, FAQ
+   Training ^14 E-learning, explainer videos
+   Legal Terms of service, privacy
+   Finance ^3 Reports, banking
+   HR Internal communications
+
+    By Industry
+
+   Gaming ^55
+   Technology & SaaS ^32
+   Mobile Apps ^23
+   E-Learning & Education ^14
+   Media & Entertainment ^12
+   Automotive ^9
+   Customer Support ^7
+   Healthcare ^6
+   Travel & Hospitality ^6
+   Sports & Fitness ^4
+   Logistics ^4
+   Finance & Banking ^3
+   Telecommunications ^3
+   E-Commerce ^3
+   Food & Beverage ^3
+   IoT & Hardware ^1
+   Marketing & Advertising
+   Real Estate
+   Energy & Sustainability
+   Legal
+   Manufacturing
+
+    By Language
+
+   FIGS ^118 French, Italian, German, Spanish
+   CJK ^98 Chinese, Japanese, Korean
+   Eastern European ^74 Polish, Czech, Hungarian, Russian
+   LATAM ^69 Latin American Spanish, Brazilian Portuguese
+   Nordic ^38 Swedish, Norwegian, Danish, Finnish
+   RTL ^33 Arabic, Hebrew, Farsi
+   SEA ^32 Thai, Vietnamese, Indonesian
+   Technology
+
+    Localization Engineering
+
+   AI / LLM / NMT Integration Multi-agent systems, benchmarking,
+   post-training
+   Continuous Localization Setup CI/CD pipelines
+   Custom Integrations and Workflows
+   Human Translation API Backed by pro linguists Nitro®
+
+    Alconost.MT Lab
+
+   Evaluate Evaluate & fix translations with LLMs
+   MQM Annotation Tool Error-based translation quality scoring Free
+   Metrics COMET, MetricX, BLEU & more
+
+    Localization Platforms
+
+   Crowdin Enterprise localization platform Technology partner
+   Tolgee Open-source localization platform Technology partner
+   GitLocalize 2-way continuous localization for GitHub
+   Platform Selection Guide + SmartCAT, Lokalise, Phrase, MemoQ, XTM
+
+    Integrations & Connectors
+
+   WordPress WPML
+   Git GitHub, GitLab
+   Shopify
+   Zendesk
+   Moodle
+   Need a Connector? Contact us
+   About
+
+    About
+
+   About Alconost
+   Blog
+   Case Studies
+   Affiliate Partners
+
+    Order and Payment
+
+   Payment Methods
+   Request a Quote
+
+    Careers
+
+   We Are Hiring
+   Become a Translator
+
+    More of Alconost
+
+   Multilingual Marketing
+   Video Production
+   Nitro Translate
+   Alconost.MT
+   Request a Quote
+   Request a Quote
+   ← Back to Blog
+   Ilya Spiridonov
+   Chief Commercial Officer, Alconost Ilya Spiridonov
+   · May 1, 2026 · 18 min read
+
+       Best LLM for Translation in 2026: A Data-Driven Engine Scoreboard
+
+   We ran 5,632 machine-translation evaluations on real client projects in
+   2025 and 2026. One engine scored highest on average, with carve-outs that
+   flip the answer for specific languages, content types, and industries.
+
+   Monthly mean AQI scores for the top 6 translation engines from January
+   2024 to April 2026, showing Gemini leading among Anthropic, GPT, DeepL,
+   Mistral, and Deepseek
+   A note on this dataset (read this before the rest)
+
+   The numbers in this article come from Alconost's own machine translation
+   evaluation pipeline, which we have been running since the NMT era in 2022.
+   The full sample is 5,632 engine-language-content evaluations across 97
+   client projects, 20 industries, 7 content types, and 85 language pairs.
+   The rankings here focus on the 2025 and 2026 subset, where today's engines
+   actually exist; the time-series chart in §7 plots the trajectory back to
+   early 2024, when the LLM engines first joined our test pool. When we say
+   "in 2025 to 2026 our linguists rated Engine X at Y," that is what we mean:
+   linguists working on real client projects, scoring real samples, on the
+   content the client paid for.
+
+   That makes the data more useful than a synthetic benchmark in some ways.
+   It is grounded in actual production work, not a sentence from the WMT
+   shared task. It also makes the data weaker than a synthetic benchmark in
+   other ways. Sample sizes vary across cells, content domains are weighted
+   toward our client mix (games, software, privacy and security, education,
+   automotive, in roughly that order), and an engine we tested less in 2025
+   will simply have less data here regardless of how it would have performed
+   if we had run more samples.
+
+   The short version: this is what we have seen, not what every team will
+   see. Use it as a starting point for evaluation, not a substitute for one.
+   There is a longer note at the end of the article under Limits and the fine
+   print if you want the full picture.
+
+   Short on time?
+
+   We built an interactive engine selector from the same dataset. Pick your
+   industry, content type, and target language, and it returns the top
+   engines for that exact slice (or the closest slice we have data for). Jump
+   straight to it ↓
+
+1. The headline: in 2025 and 2026, the LLMs are winning. And one of them is
+winning a lot
+
+   For most of the past decade, "which translation engine should I use?" was
+   a boring question. DeepL covered European languages, Google Translate
+   covered the rest, and most localization teams treated all of them as
+   interchangeable inputs into a post-editing workflow. The interesting
+   decisions were upstream: the glossary, the style guide, the post-editor.
+
+   That is no longer true. Our 2025 to 2026 sample tells a different story.
+
+   Monthly mean AQI scores for Gemini, Anthropic, GPT, DeepL, Mistral, and
+   Deepseek from January 2024 to April 2026. Gemini climbs from the mid 60s
+   to the low 80s; Anthropic and DeepL also rise but more slowly; the LLMs
+   cluster above the dedicated translation engines from mid 2024 onward.
+   Monthly mean AQI per engine, smoothed across a 3-month window. The LLMs
+   separate from the dedicated translation engines starting in mid 2024.
+
+   The 2025-onward mean for each major engine, ranked by Alconost Quality
+   Index (AQI):
+
+   Engine                 AQI (2025+) Linguist Eval (2025+) Sample (AQI / LE) 
+   Gemini                 77.7        67.8                  n=274 / n=381     
+   Anthropic (Claude)     75.6        58.9                  n=309 / n=429     
+   GPT (OpenAI)           73.1        57.6                  n=463 / n=557     
+   Mistral                71.9        51.2                  n=285 / n=378     
+   Deepseek               71.5        51.4                  n=169 / n=168     
+   DeepL                  70.8        50.0                  n=240 / n=336     
+   AutoML (Google AutoML) 70.7        49.3                  n=218 / n=316     
+   Grok                   70.3        50.7                  n=241 / n=339     
+   Amazon Translate       69.9        45.7                  n=215 / n=314     
+   ModernMT               69.1        42.9                  n=154 / n=154     
+   Microsoft Translator   67.9        40.1                  n=155 / n=155     
+
+   Sample column shows AQI evaluations / Linguist Evaluation samples
+   separately because LE is captured for a slightly larger subset of rows.
+
+   Two things to take away from this table.
+
+   One: the top three are all general-purpose LLMs (Gemini, Claude, GPT). The
+   dedicated translation engines that defined the previous decade, including
+   DeepL, Amazon, Microsoft, and ModernMT, sit in the bottom half. That gap
+   was not there in 2023.
+
+   Two: Gemini's lead is not subtle. It beats Claude by 2 AQI points and GPT
+   by 4.6 points. On linguist evaluation, where a human professional actually
+   reads the output, the gap widens to 9 points. That gap shows up across
+   languages, across content types, and it has been growing through 2025 and
+   2026.
+
+   If you are starting from "we should probably try GPT-4 as a translator,"
+   our 2025 to 2026 data quietly disagrees with you.
+
+   Should you just default to Gemini? It's not that simple.
+
+   The aggregate winner is the start of the answer, not the whole answer. The
+   2025+ data has explicit carve-outs that change the right engine for
+   specific projects:
+
+     * Deepseek leads on Simplified Chinese, where its Chinese-trained priors
+       beat the Western-trained LLMs.
+     * DeepL still wins European Portuguese, by a wide enough margin that it
+       is not a close call.
+     * Anthropic narrowly leads on a handful of languages, including German,
+       Turkish, Brazilian Portuguese, and Indonesian.
+     * Anthropic also wins one industry outright, education and e-learning
+       content, by 3 AQI points over GPT.
+     * ModernMT, AutoML, and other engines can outperform their baseline
+       ranking when paired with strong glossaries and translation memory.
+
+   If you only care about a specific cell, jump to the per-language
+   scoreboard (§3), content type (§5), industry (§6), or the interactive
+   selector (§4) to look up your slice directly. Otherwise, read on.
+
+2. How we measure: AQI, linguist evaluation, and why both exist
+
+   Quick detour before the per-language picture: how the numbers in this
+   article are produced.
+
+   We score every engine evaluation on two parallel tracks.
+
+   AQI, the Alconost Quality Index, is a weighted blend of seven metrics. The
+   weights are documented in the source dataset and align with what the
+   academic and industry literature says about the strength of each metric:
+
+     * COMET (30%): a neural framework that correlates strongly with human
+       judgment.
+     * LE, Linguist Evaluation (20%): a 0 to 100 score given by a
+       professional native-speaker linguist. Always present in our
+       calculation.
+     * nTER (15%): edit-distance metric that reflects post-editing effort.
+     * BERTscore (15%): contextual similarity using transformer embeddings.
+     * BLEU (10%): the historic n-gram precision metric, intentionally
+       down-weighted because surface overlap is a known weak signal in 2026.
+     * CHrF++ (5%): character n-gram metric, useful for morphologically rich
+       languages.
+     * COMET-QE / CometKiwi (5%): reference-free quality estimation.
+
+   AQI maps to a five-step quality scale: above 85 is near-human (minimal
+   post-editing), 70 to 85 is acceptable (light to moderate), 55 to 70 is
+   medium (moderate), 40 to 55 is low (heavy), and below 40 is
+   reject-or-retranslate.
+
+   LE, Linguist Evaluation is the human track. We do not trust the automated
+   metrics alone. The linguist score is what we ultimately recommend the
+   engine on, and it is why this work costs more than running BLEU in a
+   notebook. The structure of the linguist evaluation aligns with MQM error
+   categories: accuracy, fluency, terminology, locale convention, style,
+   design, and internationalization. You can see what an MQM-tagged review
+   looks like, or run one yourself, using our MQM tool at alconost.mt.
+
+   The reason we run both tracks is the most useful single chart in this
+   article.
+
+   Horizontal bar chart of the AQI minus Linguist Evaluation gap by engine
+   for 2025 and 2026 paired samples. Gemini has the smallest gap at +12.7.
+   Microsoft Translator has the largest gap at +27.8. The gap between
+   automated metrics and human linguist scores, paired sample, 2025 onward.
+
+   A positive number means the automated metrics rate the engine higher than
+   the linguist does. Every engine gets some flattering, since automated
+   metrics reward fluent output and do not always catch terminology or
+   context errors. But the spread is striking: Gemini's gap is less than half
+   of Microsoft's. Buyers who pick an engine from a leaderboard built on BLEU
+   and CHrF++ (which most public benchmarks effectively are) will
+   systematically over-rate the engines that produce smooth-but-wrong output,
+   and under-rate the ones that are more conservative but more accurate.
+
+   That is why a serious MT evaluation always pairs automated metrics with a
+   human reviewer. It is also why "we ran a benchmark on our content" can
+   produce different rankings than the engine vendors' published benchmarks,
+   even when both are technically correct on the metrics they report.
+
+   Want this kind of evaluation on your own content and language pairs?
+
+   Get a Quote
+
+3. The scoreboard, by language pair
+
+   The headline ranking masks meaningful per-language differences. Here is
+   the picture for the top language pairs in our 2025+ sample.
+
+   Heatmap of mean AQI scores for the top 15 language pairs across the top 6
+   engines, 2025 and later, sample size at least 5 per cell. Gemini wins most
+   cells; Deepseek leads on Chinese Simplified; Anthropic leads narrowly on
+   German, Turkish, and Brazilian Portuguese; DeepL leads on European
+   Portuguese. Top 15 language pairs by sample volume, against the top 6
+   engines. Brighter cells indicate higher AQI. Empty cells had fewer than 5
+   samples.
+
+   The full 2025+ scoreboard with sample sizes:
+
+   From English to     Best engine      Runner-up       Comment               
+                       (AQI)            
+   French (fr)         Gemini 80.0      Anthropic 79.3  tight race            
+                       (n=25)           (n=27)          
+   Spanish (es)        Gemini 80.1      Anthropic 79.9  essentially tied      
+                       (n=19)           (n=30)          
+   German (de)         Anthropic 78.2   Gemini 77.0     Anthropic narrowly    
+                       (n=18)           (n=15)          
+   Italian (it)        Gemini 81.0      Anthropic 76.6  
+                       (n=12)           (n=16)          
+   Japanese (ja)       Gemini 72.5      Anthropic 71.2  
+                       (n=22)           (n=23)          
+   Chinese, Simplified Deepseek 72.2    Gemini 71.9     Deepseek's home turf  
+   (zh-CN)             (n=12)           (n=17)          
+   Portuguese,         Anthropic 81.0   Gemini 80.4     Anthropic narrowly    
+   Brazilian (pt-BR)   (n=12)           (n=13)          
+   Turkish (tr)        Anthropic 79.1   Gemini 77.9     Anthropic narrowly    
+                       (n=13)           (n=13)          
+   Korean (ko)         Gemini 78.2      Deepseek 70.7   
+                       (n=12)           (n=7)           
+   Polish (pl)         Gemini 79.7      DeepL 74.3      
+                       (n=11)           (n=11)          
+   Russian (ru)        Gemini 73.0      Anthropic 68.6  overall harder        
+                       (n=9)            (n=10)          
+   Chinese,            Gemini 74.4      Anthropic 74.2  virtually tied        
+   Traditional (zh-TW) (n=12)           (n=12)          
+   Indonesian (id)     Anthropic 79.3   GPT 78.7 (n=15) three engines within  
+                       (n=7)                            1 point               
+   Portuguese,         DeepL 80.6 (n=8) Gemini 74.3     the iberian split     
+   European (pt)                        (n=6)           matters               
+   Dutch (nl)          DeepL 80.0 (n=6) ModernMT 80.0   small samples, NMT    
+                                        (n=5)           holdouts              
+   Hungarian (hu)      Gemini 81.9      AutoML 77.0     small sample          
+                       (n=6)            (n=5)           
+   Thai (th)           Gemini 75.0      Anthropic 68.2  small sample          
+                       (n=5)            (n=6)           
+                       Gemini 78.6      Anthropic 76.8  small sample; DeepL   
+   Arabic (ar)         (n=5)            (n=8)           had <5 samples in     
+                                                        2025+                 
+
+   In most language pairs, Gemini wins, with Anthropic close behind. The
+   carve-outs are where this table actually pays off.
+
+   Deepseek wins on simplified Chinese. Not surprising once you say it out
+   loud. Deepseek is a Chinese-trained model and the linguistic priors it
+   brings to en→zh-CN are different from the priors a Western-trained LLM
+   brings. If you are shipping a Chinese version and you are defaulting to
+   GPT or Claude because that is what your stack already uses, this is the
+   one cell in the table where the default is probably wrong.
+
+   Anthropic narrowly leads on several pairs. German, Brazilian Portuguese,
+   Turkish, and Indonesian all show Anthropic ahead of Gemini, in each case
+   by less than 2 AQI points. That is within natural sample variance; treat
+   them as cells where Gemini and Anthropic are interchangeable rather than
+   as a clean Anthropic win. The honest read is that for these languages,
+   either of the top two LLMs is a reasonable production default.
+
+   DeepL still wins on European Portuguese. The pt-PT margin (80.6 vs Gemini
+   74.3) is real and persistent. If you are picking between DeepL and an LLM
+   specifically on pt-PT, the data favors DeepL. The Brazilian Portuguese
+   (pt-BR) and European Portuguese (pt) split is the one most translation
+   budgets get wrong by treating "Portuguese" as one locale. They are
+   different engines for different markets even though they share a language
+   code root. The same kind of split should be checked carefully on Spanish
+   (es-ES vs es-MX vs es-LATAM); we do not have enough samples broken out by
+   sub-locale to publish that here, but the pattern holds in our experience.
+
+   Arabic is sparse in our 2025+ data. DeepL had a long-standing reputation
+   as the strongest engine for Arabic, but our 2025 sample for DeepL on
+   Arabic is below the n=5 threshold we use for inclusion. Gemini scored 78.6
+   on n=5 Arabic samples. We would not commit to either claim on a sample
+   that thin. If Arabic is core to your project, run a project-specific
+   evaluation before sourcing.
+
+4. The interactive scoreboard: pick your slice
+
+   Pick any combination of industry, content type, and target language. The
+   selector returns the top engines for that exact slice if we have enough
+   samples; otherwise it falls back to the closest combination we do have
+   data for, and tells you which one.
+
+   Industry
+   Content type
+   Language
+
+   Treat this as a starting point, not a verdict. The numbers above are mean
+   AQI on Alconost's 2025 to 2026 MTPE sample. Most three-way slices
+   (industry × content type × language) have small sample sizes; engine
+   vendors update silently and frequently; and project-specific prompting,
+   glossary, and translation memory will move quality on a "second-place"
+   engine more than a vendor switch will. Translation engines that look
+   winning today may not be winning next quarter, and the gap between an
+   engine's baseline performance and its performance on your specific content
+   is often larger than the gap between two engines on a generic benchmark.
+
+   If engine selection actually matters for your project, run the evaluation
+   on your own content and your own languages. We do that as a fixed-scope
+   engagement: per-language, per-content-type recommendation, with a
+   re-evaluation cadence that fits your release cycle.
+
+   Get a custom MT evaluation →
+
+5. The scoreboard, by content type
+
+   Different content types stress engines differently. Marketing copy needs
+   voice. Legal content needs terminological precision. Game UI needs to fit
+   in a button. Here is the per-content-type picture from 2025+.
+
+   Grouped horizontal bar chart of the top 4 engines per content type for
+   2025 onward, ranked by mean AQI. Gemini leads UI, Narrative, Marketing,
+   Documents, and Legal; Anthropic leads Online courses and Support
+   materials. Top 4 engines per content type, 2025+. Sample size shown next
+   to each engine.
+     * UI / In-App Content (the largest content category in our sample,
+       n=1,203 in 2025+): Gemini 81.0 → Anthropic 79.2 → GPT 77.9 → Mistral
+       76.6. Gemini's lead is tighter here than elsewhere, and GPT closes the
+       gap on shorter, structurally constrained UI strings.
+     * Narrative Content (long-form copy, articles, in-product narrative
+       text, n=1,132): Gemini 73.5 → Anthropic 71.5 → Deepseek 70.0 → GPT
+       68.2. Surprisingly close cluster; the choice often comes down to voice
+       consistency across a long document, which is a per-project judgment
+       more than a per-engine one.
+     * Marketing & SEO (n=128): Gemini 82.9 → Anthropic 78.5 → Grok 77.1 →
+       Mistral 76.7. Gemini has the largest margin here, which fits the
+       model's reputation for fluent, idiomatic prose. For tone-critical
+       marketing copy, the data supports Gemini as the default. This is also
+       the content category where MTPE matters most, since "fluent and wrong"
+       is the failure mode that hurts a campaign.
+     * Online courses (n=132): Anthropic 75.5 (n=12) → ModernMT 75.0 (n=6) →
+       Gemini 74.9 (n=14) → Grok 73.6 (n=13). The top three are within a
+       point of each other; do not pick on this margin alone.
+     * Documents (long-form, structured documents, n=65): AutoML 81.6 (n=5) →
+       Gemini 79.0 (n=10) → DeepL 78.7 (n=6) → Grok 75.2 (n=9). AutoML tops
+       the table on a thin sample; treat as suggestive.
+     * Legal (n=35 total, n=5 per top engine): Gemini 84.6 → DeepL 80.3 →
+       Mistral 74.3 → Grok 71.9. This is the smallest cell in our content
+       data and the most counter-intuitive result. DeepL has marketed itself
+       for years as the right choice for legal and regulated content. In our
+       2025+ sample, on the legal content we processed, Gemini scored 4
+       points higher. Sample size is genuinely small (n=5 per engine) and the
+       AQI differences here are within plausible variance. Run your own
+       evaluation before choosing an engine for high-stakes legal content.
+       The era when "DeepL for legal, period" was a defensible default is
+       closing, but our data is not strong enough alone to declare a
+       successor.
+     * Support materials (n=20 total): Anthropic, DeepL, GPT, and AutoML all
+       within 2 points. Sample is genuinely too small to rank confidently.
+
+   The pattern across content types is consistent with the cross-language
+   picture: Gemini is the default winner across the largest cells, with a
+   handful of explicit carve-outs. If you only remember one decision rule
+   from this article, it is this one: Gemini, except when you have a specific
+   reason not to. The rest of the article is the list of specific reasons.
+
+6. The scoreboard, by industry domain
+
+   Some industries reward specific engines more consistently than others.
+
+   Industry                     Best engine (AQI)     Runner-up              
+   Games & Entertainment        Gemini 73.8 (n=118)   Anthropic 72.0 (n=120) 
+   IT & Software Development    Gemini 81.3 (n=59)    Anthropic 79.1 (n=87)  
+   Privacy & Security           ModernMT 74.4 (n=10)  Anthropic 72.0 (n=18)  
+   Education & E-Learning       Anthropic 85.6 (n=20) GPT 82.6 (n=67)        
+   Financial Services & Banking Gemini 84.6 (n=11)    DeepL 79.2 (n=12)      
+   Automotive                   Gemini 79.5 (n=12)    Grok 75.6 (n=12)       
+
+   Two anomalies worth flagging.
+
+   Education content goes to Anthropic. Across the cluster of engines we
+   tested on education and e-learning content, Claude scored noticeably
+   higher on linguist evaluation than Gemini did, and high in absolute terms
+   (85.6 AQI is well into the "near-human" band, n=20). Claude's general
+   reputation for following structured instructions and not hallucinating
+   registry shifts probably contributes to this.
+
+   Privacy & Security content goes to ModernMT, but not for the obvious
+   reason. The ModernMT result on Privacy & Security is real and replicable
+   on the data we have, but it is also a single-customer effect: the project
+   that produced most of the ModernMT samples in this domain had a heavy
+   in-house glossary and a mature translation memory. ModernMT is one of the
+   engines that benefits most from your existing language assets. The
+   headline lesson is not that ModernMT is the right Privacy & Security
+   engine; it is that language assets matter. A clean glossary, a current
+   style guide, and a well-maintained translation memory will move quality
+   more than switching engines will, especially on engines that integrate
+   cleanly with them.
+
+   This is also where a vendor with depth in language-asset management is
+   worth paying for. If your translation memory is fragmented across two
+   platforms, your glossary is six months out of date, or your style guide
+   lives in a Slack DM, the engine ranking will not save you. Engine
+   selection is the easy half of the question; running an AI translation
+   workflow well is the hard half.
+
+7. The data has an expiry date
+
+   Everything above is dated. The first question we get when we share
+   rankings like these is "will this still be true in six months?" The answer
+   is no.
+
+   Here are the same three engines (Gemini, Claude, DeepL) in quarterly
+   buckets across 2024, 2025, and 2026:
+
+   Period            Gemini AQI   Anthropic AQI DeepL AQI    
+   Q1 2024           46.4 (n=7)   no data       56.2 (n=29)  
+   Q2 2024           65.8 (n=19)  88.5 (n=6)    63.3 (n=18)  
+   H2 2024           73.1 (n=129) 70.1 (n=128)  69.1 (n=105) 
+   H1 2025           76.8 (n=210) 75.7 (n=205)  69.6 (n=171) 
+   H2 2025           79.1 (n=33)  72.6 (n=31)   71.6 (n=30)  
+   2026 (Jan to Apr) 82.2 (n=31)  76.5 (n=73)   75.5 (n=39)  
+
+   A few observations.
+
+   The early-2024 numbers are sparse. The Q2 2024 Anthropic spike (88.5) is
+   on a six-sample cell and should not be read as "Claude was best in
+   mid-2024"; it is a small subset of evaluations where Claude happened to
+   score well. By H2 2024 all three engines had stabilized at meaningful
+   sample sizes, and the trajectory becomes readable.
+
+   Through 2025, Gemini built a roughly 3-point lead, then extended it.
+   Anthropic wobbled, with a strong H1 followed by a weaker H2 followed by
+   recovery in 2026. DeepL has improved meaningfully in 2026 (its 2026 AQI is
+   the highest it has been in our data), driven mostly by gains on its weaker
+   languages, though it still trails the LLM leaders.
+
+   The implication for buyers is uncomfortable: the right engine this quarter
+   is not necessarily the right engine next quarter. Engines update silently.
+   The Gemini you tested in May is not the Gemini you are translating with in
+   November. Most teams that commit to a single MT vendor for a year do so on
+   a stale evaluation.
+
+   The fix is not to avoid commitment; it is to commit, then re-evaluate. We
+   recommend a full re-evaluation per project per quarter, with lighter
+   sampling between. This also catches the rarer failure mode where an engine
+   quietly regresses on a specific language pair after an API update, which
+   we have seen at least three times in our 2025 data.
+
+8. What this means for your project
+
+   The scoreboard above is the easy part of the answer. The hard part is what
+   to do with it.
+
+   Picking the highest-scoring engine for each language and content type is a
+   reasonable starting point. It is not the whole answer, for three reasons.
+
+   One: language assets matter more than the baseline. A glossary, a style
+   guide, and a clean translation memory will move quality on a
+   "second-place" engine more than switching to "first place" without those
+   assets will. The engine evaluation tells you the ceiling; your language
+   assets determine how close you actually get to it. Engines like ModernMT,
+   AutoML, and Mistral gain noticeably more from a strong TM and glossary
+   than the LLMs do.
+
+   Two: prompting and fine-tuning move the needle for LLMs. A vanilla Gemini
+   call and a Gemini call with a glossary, brand voice instructions, and a
+   few example translation pairs will produce very different output, on the
+   same content. None of the numbers in this article involve project-specific
+   prompting; they are baseline comparisons. With prompting, the ceiling
+   moves up. Rankings can also shift, sometimes dramatically.
+
+   Three: review is not optional. Every engine in our top tier has a Linguist
+   Evaluation score in the 50s or low 60s on a 0 to 100 scale. That is good
+   translation by previous-decade standards. It is not ship-ready translation
+   for content that touches a customer. The data argues for a layered
+   workflow: engine selection, then targeted prompting, then MTPE with human
+   review, then linguistic QA on the build for anything inside a UI. Skipping
+   the human layer is the failure mode these rankings are most likely to
+   invite, because the better the engines look on a scoreboard, the more
+   tempting raw-AI deployment becomes.
+
+   This is the case for an MTPE workflow rather than an unmanaged engine API
+   call. We will spare you the sales pitch.
+
+   Need an MTPE workflow built on the right engine for your content?
+
+   Get a Quote
+
+9. How we approach MT engine evaluation
+
+   For context on how the numbers above were produced, here is the process we
+   run on every project where engine choice matters:
+
+   1
+
+  Define the scope
+
+   Identify languages and content type. Set quality expectations: fluency,
+   accuracy, terminology adherence. Pull glossaries, style guides, and
+   reference materials. Prepare and format test files for optimal MT input.
+
+   2
+
+  Select MT engines
+
+   Choose from domain-specific NMTs and LLMs. Develop custom prompts for
+   LLM-based pre-translation. Ensure proper configuration of selected engines
+   and prompts. The pool is project-specific and gets smaller as the data
+   narrows the field.
+
+   3
+
+  Run the MT evaluation
+
+   Translate the test sample using all selected engines under identical
+   conditions for unbiased comparison. Up to 14 engines are evaluated on the
+   same content sample.
+
+   4
+
+  Score on the metric stack and on linguist evaluation
+
+   All engines get the seven-metric AQI calculation (COMET, LE, nTER,
+   BERTscore, BLEU, CHrF++, COMET-QE). Every output is also read by a
+   professional native-speaker linguist in the relevant content domain. The
+   linguist scores fluency, accuracy, terminology, and overall usability, and
+   notes specific error patterns. This is the slow step. It is also the step
+   that produces the AQI-vs-LE gap chart, and the reason our rankings can be
+   trusted.
+
+   5
+
+  Recommend, document, and re-test on a cadence
+
+   The recommendation goes back to the project: which engine, for which
+   language, with what prompting and language-asset configuration, and how
+   often it should be re-evaluated. For most active projects the answer is
+   "every quarter, with lighter monthly sampling."
+
+   This is how the data in this article was produced. It is also the work we
+   would do on any project where engine selection affects quality at scale.
+   The process slide and methodology summary are part of every project
+   kickoff we run.
+
+10. Limits and the fine print
+
+   Sample composition. Our dataset reflects the projects we ran in 2025 and
+   2026: heavily weighted toward games, IT and software, privacy and
+   security, and education content, and toward English-as-source. Industries
+   we are under-weighted in (healthcare, financial services beyond payments,
+   government, hospitality) will not be well-represented in the per-domain
+   rankings; treat those rankings as descriptive of our sample, not as an
+   industry benchmark.
+
+   Sample size. Cell sizes vary. Where we have quoted a top-engine winner
+   with fewer than ten samples (Vietnamese, Dutch, Hungarian, Thai, Arabic,
+   several content and domain combinations), we have flagged it inline. A
+   small sample winning by a small margin is not the same as a large sample
+   winning by a large margin. Treat small-n cells as suggestive and run your
+   own evaluation before committing.
+
+   Linguist evaluation. Each LE score is produced by a single professional
+   native-speaker linguist working in the relevant content domain. This
+   introduces a degree of subjectivity which we mitigate through consistency
+   in scoring rubrics aligned with MQM error categories and through linguist
+   QA over time, but does not eliminate. Expect ±5 AQI / LE points of natural
+   variance between expert linguists on the same sample.
+
+   Engine versions and configurations. The engines tested here are the
+   versions and API endpoints publicly available through the relevant vendor
+   APIs at the time of each evaluation. Engine vendors update silently and
+   frequently. The Gemini, Claude, GPT, Mistral, and Deepseek APIs available
+   in late 2025 are not the same products as the equivalent APIs available in
+   early 2024, even where the version label looks the same. The data is
+   current to the dates of evaluation, not to the day you read this article.
+
+   Prompting and language assets. Most evaluations in the dataset use
+   baseline API calls without project-specific system prompts, glossary
+   injection, or fine-tuning. With those layers added, the rankings can
+   shift, sometimes substantially, in either direction. Project-specific
+   results will not reproduce the table here exactly.
+
+   Past performance is not predictive. The 2024 numbers in this article are
+   already mostly stale, because the engine landscape moved fast in 2025. The
+   2026 numbers will be stale soon. If you are making a multi-year sourcing
+   decision off any single snapshot like this one, you are doing it wrong.
+   Engine selection is a continuously re-evaluated decision now, not a
+   once-a-year procurement event.
+
+   Vendor relationships and disclosure. Alconost has no commercial
+   relationships with any of the engine vendors named in this article. We are
+   not a reseller. We do not receive referral fees, affiliate commissions,
+   marketing development funds, or any other compensation that would create a
+   financial incentive to rank one engine higher than another. What we do
+   sell, and the reason this article exists, is machine translation
+   post-editing: the human-review layer on top of these engines. The ranking
+   informs which engine we run on a project, but it does not change what we
+   charge or how we deliver. That is the relevant disclosure: we have a
+   commercial interest in the post-editing layer, not in any individual
+   engine.
+
+   Trademarks. Gemini, Anthropic, Claude, GPT, OpenAI, ChatGPT, DeepL, Google
+   Translate, Microsoft Translator, Microsoft Bing Translator, Amazon
+   Translate, ModernMT, Mistral, Deepseek, Grok, Llama, Qwen, and any other
+   engine names referenced in this article are trademarks of their respective
+   owners. The article discusses these products in the context of measured
+   performance on a defined sample; nothing here should be construed as a
+   recommendation against, endorsement of, or warranty about any vendor.
+
+FAQ
+
+   Which AI is best for translation in 2026? 
+   In our 2025 to 2026 sample of 3,800+ evaluations, Gemini ranked first
+   overall on Alconost Quality Index (AQI 77.7) and on linguist evaluation
+   (LE 67.8). Anthropic Claude and OpenAI GPT followed. The headline ranking
+   has carve-outs: Deepseek wins on simplified Chinese, DeepL still leads
+   European Portuguese, and Anthropic narrowly leads on a handful of
+   languages including German and Brazilian Portuguese. The right answer for
+   any specific project depends on the language, the content type, and how
+   strong your translation memory and glossary are.
+   Is GPT-4 good for translation? 
+   GPT scored 73.1 AQI and 57.6 linguist evaluation in our 2025+ data, which
+   puts it in the top tier but consistently behind Gemini and Anthropic. GPT
+   is competitive on shorter, structurally constrained content like UI
+   strings, and it leads on a few specific language pairs (Vietnamese in our
+   small sample, Danish in 2026). For most other situations, Gemini
+   outperforms it on the same content. The honest answer: GPT is a credible
+   default if you are already on the OpenAI stack, but it is not the engine
+   the 2025 to 2026 data points to as the best in class.
+   DeepL vs Gemini: which is better in 2026? 
+   On our 2025+ aggregate, Gemini outscores DeepL by 6.9 AQI points (77.7 vs
+   70.8) and by 17.8 linguist evaluation points (67.8 vs 50.0). DeepL still
+   wins specific cells, most notably European Portuguese (DeepL 80.6 vs
+   Gemini 74.3) and several smaller European language pairs. DeepL also has
+   the advantage of a more predictable enterprise contract and on-premise
+   deployment options that Gemini does not match. If you are running
+   translation through DeepL on European Portuguese, Dutch, or other
+   DeepL-strong cells, the data does not say to switch. On most other
+   content, Gemini scores higher.
+   Can I use AI translation without post-editing? 
+   For low-stakes content (internal knowledge bases, draft marketing copy,
+   documentation that no one will read end to end), an AI engine plus a light
+   proofread is often enough. For anything customer-facing, the answer is no.
+   Every engine in our top tier has a Linguist Evaluation score in the 50s or
+   low 60s on a 0 to 100 scale, which is good translation by previous-decade
+   standards but is not ship-ready translation. The right pattern for
+   production content is AI plus post-editing with a human reviewer, plus LQA
+   on the build for content that lives inside a UI.
+   How often should I re-evaluate my MT engine? 
+   Quarterly, with lighter monthly sampling between full re-evaluations.
+   Engine vendors update silently and frequently. The Gemini, Claude, GPT,
+   Mistral, and Deepseek APIs available in late 2025 are not the same
+   products as the equivalent APIs available in early 2024, even when the
+   version label looks the same. We have observed at least three cases in
+   2025 where an engine quietly regressed on a specific language pair after
+   an API update. Continuous evaluation catches that; an annual procurement
+   cycle does not.
+   Does prompt engineering change the engine ranking? 
+   Yes, sometimes substantially. The numbers in this article are baseline API
+   calls without project-specific system prompts, glossary injection, or
+   fine-tuning. Adding those layers moves quality up and can shift the
+   rankings, especially for LLM-class engines that respond well to a
+   structured prompt and reference materials. Project-specific results will
+   not reproduce the table here exactly. Engine selection is the starting
+   point of an evaluation, not the end of one.
+
+Where to go next
+
+   If you want to go deeper into the methodology, our AI translation
+   workflows page walks through how we run a full AI plus human translation
+   workflow on top of the engines above. The MQM annotation tool we maintain
+   is a free way to see what an MQM-tagged review looks like before
+   commissioning one.
+
+   For decision-stage reading: AI vs. Human Translation, MTPE Explained, and
+   NMT vs. LLM cover where AI translation fits in a modern localization
+   program. LQA vs. Proofreading covers the review layer for content inside a
+   UI.
+
+   If you would like us to run this kind of evaluation on your own content,
+   in your own languages, against the engine pool that fits your stack, we do
+   that as a fixed-scope engagement. The deliverable is a per-language,
+   per-content-type recommendation and a re-evaluation cadence that fits your
+   release cycle. Get in touch.
+   About the Author
+   Ilya Spiridonov
+   Ilya Spiridonov
+   Chief Commercial Officer, Alconost
+
+   Ilya has spent 10+ years helping companies scale globally through
+   localization. As CCO at Alconost, he works directly with enterprise and
+   SaaS clients on localization strategy, MT engine selection, and ROI
+   optimization.
+
+     ----------------------------------------------------------------------
+
+   About Alconost
+
+   Alconost is a human translation company specialised in MTPE. We run the
+   kind of evaluation described in this article on real client projects and
+   ship AI plus human-review workflows in 120+ languages. Get a quote.
+
+  Related Articles
+
+     * MTPE Explained: How AI plus Human Review Actually Works
+     * AI vs. Human Translation: A Practical Guide
+     * NMT vs. LLM for Translation
+
+    Related Services
+
+     * AI Translation Workflows
+     * Machine Translation Post-Editing
+     * AI Translation Quality Control
+     * Linguistic Quality Assurance
+
+    Related Articles
+
+     * MTPE Explained
+     * AI vs. Human Translation
+     * NMT vs. LLM for Translation
+     * LQA vs. Proofreading
+
+Our Work
+
+   See how we help global companies scale their reach.
+
+   All Games Software Mobile Apps E-Learning
+   More ▾
+   WebsitesMediaE-Commerce
+   JetBrains
+   Software
+
+  JetBrains
+
+   1,000,000+ words localized into JA, ES, ZH-CN, KO, PT-BR, FR, TR, CS, RU
+
+   JetBrains / YouTrack & Hub
+   Software
+
+  JetBrains / YouTrack & Hub
+
+   Localization of Jetbrains' products Youtrack and Hub
+
+   Microsoft MakeCode
+   Software
+
+  Microsoft MakeCode
+
+   Localization of Microsoft MakeCode
+
+   TikTok
+   Mobile Apps
+
+  TikTok
+
+   100,000+ words localized into NL, FIL, FI, FR, DE, HE, IT, ES, SV, FR-CA,
+   ES-MX for ByteDance
+
+   Viber
+   Mobile Apps
+
+  Viber
+
+   Localization of Viber messenger
+
+   Read case study
+   GitHub
+   Software
+
+  GitHub
+
+   Translation of GitHub guides and materials
+
+   Zendesk
+   Software
+
+  Zendesk
+
+   Zendesk Knowledge Base localization for multilingual customer support
+
+   Read case study
+   Airalo
+   Mobile Apps
+
+  Airalo
+
+   25,000 words localized into AR, ZH-CN, CS, FIL, FR, DE, EL, HE, HI, IT,
+   JA, KO, PL, PT-BR, RU, ES-419, TH, TR, UK
+
+   Choco
+   Mobile Apps
+
+  Choco
+
+   15 000+ words localized into JA, KO, VI-VN, IT, PL, NL, PT-BR, CS, CA,
+   ZH-CN
+
+   Bitrix24
+   Websites
+
+  Bitrix24
+
+   100 000 words and counting localized into ES, PT-BR, JA, ZH-CN and 11 more
+
+   Harvard University
+   E-Learning
+
+  Harvard University
+
+   Localization of online courses for Harvard University
+
+   Xsolla
+   Games
+
+  Xsolla
+
+   Localization of Xsolla products
+
+   Read case study
+   SafetyCulture
+   Software
+
+  SafetyCulture
+
+   5 000–8 000 words per month localized into JA, PL, TH, TA, SV-SE, VI, UK,
+   ID, HI, KO, NO, PT-PT, RO, RU, TR, AR, BN, ZH-CN, ZH-TW, DA, FI, IT, DE,
+   NL, FR, ES-ES, PT-BR, ES-MX
+
+   Veriff
+   Software
+
+  Veriff
+
+   12 000 words per month localized into ES-MX, ES-419, SO, SI-LK, VI, SL,
+   SK, SR-CS, RO, PT-PT, PL, MS, MK, LT, LV, JA, HI, DE, KA, FR, FIL, NL,
+   ZH-TW, ZH-CN, CA, BG, BN, ES-ES, PT-BR
+
+   Bitrix24 / Voice Responses
+   Media
+
+  Bitrix24 / Voice Responses
+
+   into DE, EN, ES, PT-BR, RU, UK
+
+   Read case study
+   DocuWare
+   Software
+
+  DocuWare
+
+   90,000 words localized into 23 languages for cloud & on-premises document
+   management
+
+   Gartic Phone
+   Games
+
+  Gartic Phone
+
+   5 000 words localized into JA, AR, TH, CS, ID, FR, DE, ZH-CN, IT, NL, SV,
+   RO, KA, FA, AZ
+
+   Bandsintown
+   Software
+
+  Bandsintown
+
+   Localization of Bandsintown app
+
+   Read case study
+   Aviasales
+   Websites
+
+  Aviasales
+
+   100,000 words localized into 12 languages for flight search platform
+
+   Endomondo
+   Software
+
+  Endomondo
+
+   10 000 words and counting localized into CS, HI, NO, TR and 12 more
+
+   Liferay
+   Software
+
+  Liferay
+
+   Localization of Liferay Platform
+
+   BattleTech
+   Games
+
+  BattleTech
+
+   Localization of the Battletech game
+
+   Goat Simulator
+   Games
+
+  Goat Simulator
+
+   Localization of the Goat Simulator game
+
+   Stellaris
+   Games
+
+  Stellaris
+
+   Localization of the Stellaris game
+
+   Movavi
+   Mobile Apps
+
+  Movavi
+
+   100,000+ words localized into 20+ languages for video editing software
+
+   Parimatch
+   Software
+
+  Parimatch
+
+   200,000+ words localized into FR, FR-CA, DE, HI, IT, JA, PL, PT, PT-BR,
+   ES, ES-MX, TR for betting platform
+
+   Prequel
+   Mobile Apps
+
+  Prequel
+
+   Expanded Top-10 photo editing app to 100M+ Gen Z users worldwide
+
+   Ultimate Guitar
+   Mobile Apps
+
+  Ultimate Guitar
+
+   4,000 words localized into ES with LQA for Muse Group's guitar app
+
+   Wildlife Studios
+   Games
+
+  Wildlife Studios
+
+   75 000+ localized into FR, DE, IT, KO, RU, TR, PT-BR, ES-MX, UK, RO, AR
+
+   App in the Air
+   Mobile Apps
+
+  App in the Air
+
+   500,000+ words localized into PT-BR, PT, NL, KO, HI, FR, ES, SV, IT, TR,
+   JA, AR, DE, ZH-CN, ZH-TW
+
+   Apptweak
+   Mobile Apps
+
+  Apptweak
+
+   100,000 words localized into JA, KO, ZH, FR for ASO analytics platform
+
+   Discourse
+   E-Learning
+
+  Discourse
+
+   55,000 words localized into ZH-CN, PT-BR, IT, FR, DE, AR, FI, JA, ES for
+   open-source forum platform
+
+   Gcore
+   Software
+
+  Gcore
+
+   100 000+ words localized into ZH-CN, DE, ES, PT-BR
+
+   Grand Hotel Mania
+   Games
+
+  Grand Hotel Mania
+
+   100,000+ words localized from RU into 20 languages for hotel simulator
+   game by Deuscraft
+
+   IllFonic
+   Games
+
+  IllFonic
+
+   IllFonic Inc.
+
+   InterSystems
+   E-Learning
+
+  InterSystems
+
+   550+ words localized into ES, FR, PT-BR, ZH-CN, JA
+
+   Kissflow
+   E-Learning
+
+  Kissflow
+
+   140,000+ words localized into IT, TH for low-code/no-code work platform
+
+   Klondike
+   Games
+
+  Klondike
+
+   50,000 words localized into DE, ES, IT, FR, PL, NL, JA, KO, ZH-CN, ZH-TW,
+   PT-BR for VIZOR APPS
+
+   Clue
+   Software
+
+  Clue
+
+   Localization of Clue mobile app
+
+   Read case study
+   Dacadoo
+   Mobile Apps
+
+  Dacadoo
+
+   100,000+ words localized into 17 languages for digital health platform
+
+   My Cafe
+   Games
+
+  My Cafe
+
+   400 000 words and counting localized into FR, ES, PT-BR, KO and 6 more
+
+   Party Hard
+   Games
+
+  Party Hard
+
+   Localization of the Party Hard game
+
+   Planner 5D
+   Mobile Apps
+
+  Planner 5D
+
+   20,000 words localized into 24 languages for home design app
+
+   Punch Club
+   Games
+
+  Punch Club
+
+   20 000 words localized into ZH-CN, PL
+
+   Read case study
+   RICOH360 Tours
+   Software
+
+  RICOH360 Tours
+
+   18 000 characters localized into Japanese –> English, German, French,
+   Spanish, Dutch
+
+   Sumsub
+   Software
+
+  Sumsub
+
+   7,000 words localized into 28 languages for identity verification platform
+
+   Transporeon
+   Software
+
+  Transporeon
+
+   50,000 words localized into 18 languages for logistics visibility platform
+
+   Aktiia
+   Websites
+
+  Aktiia
+
+   21,000 words localized into FR, DE, IT for blood pressure monitoring
+   startup
+
+   Awarefy
+   Mobile Apps
+
+  Awarefy
+
+   30 000 characters localized into Japanese –> English
+
+   Baby Tracker
+   Mobile Apps
+
+  Baby Tracker
+
+   5 000 words localized into ES-LA, PT-BR, DE, UK
+
+   Circuit
+   Mobile Apps
+
+  Circuit
+
+   5,000 words localized into 30+ languages for delivery route planning app
+
+   CSAT
+   Software
+
+  CSAT
+
+   200 000+ words localized into AR, HE, IT, KO, PL, PT-BR, PT, TR, ZH-CN
+
+   Driivz
+   Software
+
+  Driivz
+
+   1 300 words localized into HR, CS, ET, FI, FR, FR-CA, DE, EL, HU, IS, IT,
+   LV, LT, NO, PL, RO, SK, SL, ES-ES, SV
+
+   Foodback
+   E-Learning
+
+  Foodback
+
+   50,000 words localized into 12 languages for restaurant feedback platform
+
+   Gentler Streak
+   Mobile Apps
+
+  Gentler Streak
+
+   2 000 words per month localized into FR, DE, IT, ZH, ZH-HK, JA, KO
+
+   Harvest Land / Paris: City Adventure
+   Games
+
+  Harvest Land / Paris: City Adventure
+
+   200,000+ words localized from RU into 8 languages for Mysterytag games
+
+   Harvest Land
+   Games
+
+  Harvest Land
+
+   2 000 words per month localized into RU → EN, ES, PT-PT, FR, IT, DE, KO,
+   JA, ZH
+
+   Hotel Life
+   Games
+
+  Hotel Life
+
+   12,000 words localized into 10 languages for hotel simulation game by
+   Eidolon
+
+   HUB Parking
+   Software
+
+  HUB Parking
+
+   62,000 words localized into RU for smart parking solutions
+
+   Keenetic
+   Websites
+
+  Keenetic
+
+   30,000 words localized into PL, ES, FR, DE, SV, PT, IT for Wi-Fi router
+   manufacturer
+
+   Charm Farm
+   Games
+
+  Charm Farm
+
+   Localization of Charm Farm Game
+
+   Read case study
+   Zombie Castaways
+   Games
+
+  Zombie Castaways
+
+   Localization of the Zombie Castaways game
+
+   Meisterplan
+   Software
+
+  Meisterplan
+
+   74,500 words localized into ES, FR, DE for project portfolio management
+
+   Onde
+   Mobile Apps
+
+  Onde
+
+   up to 1 000 words per month localized into SV, RW, DA, SQ, PL, KM, ET, MY,
+   ZH-HANS, FI, DE, LV, HE, NL, HR, SK, NO, LT, IT, TH, SO, ID, IS, UR-PK,
+   ZH-HANT, CS, UK and 10 more
+
+   OpenProject
+   Software
+
+  OpenProject
+
+   1 000+ words per month, up to 150 000 localized into FR, ZH-CN, ES-ES, IT,
+   PL, PT-PT, PT-BR, KO, UK
+
+   Pillow
+   Software
+
+  Pillow
+
+   100,000+ words localized into 13 languages for sleep tracking app by
+   Neybox
+
+   Playwing
+   Games
+
+  Playwing
+
+   40 000+ words localized into AF, AR, BN, MY, HR, CS, NL, ET, FR, KA, DE,
+   EL, HU, ID, MS, PL, PT, RU, SK, ES, SV, TH
+
+   Clash of Kings
+   Games
+
+  Clash of Kings
+
+   Proofreading of in-game text for Clash of Kings
+
+   Read case study
+   Soundiiz
+   Software
+
+  Soundiiz
+
+   15,000+ words localized into 14 languages for music playlist transfer app
+
+   Speakap
+   Mobile Apps
+
+  Speakap
+
+   5,000 words localized into DE, NL, ES for employee communication app
+
+   Stripo
+   Websites
+
+  Stripo
+
+   25 000 words localized into PT-BR, TR, CS, FR, DE, IT, ES, PL, ZH-TW, NL,
+   SL
+
+   Sufio
+   Mobile Apps
+
+  Sufio
+
+   3 000 words localized into FR, DE
+
+   Tonsser
+   Mobile Apps
+
+  Tonsser
+
+   40,000 words localized into ES-US, PT, SV, DE for football community app
+
+   Vizor
+   Games
+
+  Vizor
+
+   into ES-ES, NL, PL, ZH-CN, ZH-TW, PT-BR, IT, KO, FR, DE
+
+   Read case study
+   Alvadi
+   E-Commerce
+
+  Alvadi
+
+   Multilingual SEO for automotive supplier expanding to 30+ markets
+
+   BoxHero
+   Software
+
+  BoxHero
+
+   10000 localized into ES-419, ZH-CN, ZH-TW
+
+   Epic Roller Coasters
+   Games
+
+  Epic Roller Coasters
+
+   4,000 words localized into ZH-CN, FR, DE, JA, KO, RU, ES for VR game by
+   B4T Games
+
+   Dating Apps Bundle
+   Mobile Apps
+
+  Dating Apps Bundle
+
+   50,000 words localized into 36+ languages for Red Panda Labs dating apps
+
+   Face Yoga
+   Mobile Apps
+
+  Face Yoga
+
+   2,000 words localized into ES-419, PT-BR for skincare app by Tepluhab
+
+   Forest Bounty
+   Games
+
+  Forest Bounty
+
+   10,000 words localized from RU/EN into ES, FR, PL, PT-BR for VigrGames
+
+   HUD App
+   Software
+
+  HUD App
+
+   10,000 words localized into 18 languages for dating app
+
+   DreamCommerce
+   E-Commerce
+
+  DreamCommerce
+
+   Localization of DreamCommerce Platform
+
+   Read case study
+   Jooble
+   E-Learning
+
+  Jooble
+
+   10 000 words localized into ES, PT, KO, JA and 11 more
+
+   Read case study
+   Smarty CRM
+   Software
+
+  Smarty CRM
+
+   Localization of Smarty CRM platform
+
+   Read case study
+   Targetprocess
+   Software
+
+  Targetprocess
+
+   Localization of Targetprocess platform
+
+   Mahjong Treasure Quest
+   Games
+
+  Mahjong Treasure Quest
+
+   30 000 words localized into EN → JA, MTPE: EN → PL, NL, KO, ZH-CN, ZH-TW,
+   DE, FR
+
+   Primagest
+   Websites
+
+  Primagest
+
+   80 000 characters localized into JA → EN, ZH
+
+   Raymy
+   Software
+
+  Raymy
+
+   80 000 characters localized into Japanese –> English, Chinese
+   (traditional),Vietnamese, Hindi
+
+   Sana Commerce
+   E-Commerce
+
+  Sana Commerce
+
+   Bi-weekly B2B e-commerce platform updates in 22 languages
+
+   Swappy Dog
+   Games
+
+  Swappy Dog
+
+   25,000 words localized from RU into 19 languages for match-3 game by
+   Funmatica
+
+   Swoo
+   Mobile Apps
+
+  Swoo
+
+   30,000 words localized into ES, IT, PT for digital wallet app by
+   CARDS/MOBILE
+
+   EnjoyGaming
+   Games
+
+  EnjoyGaming
+
+   500 words per month localized into DE, ES, FR, HI, IT, JA, KO, PT, PT-BR,
+   RU, SV, TR, UK
+
+   2Solar
+   Software
+
+  2Solar
+
+   10,500 words localized into DE for solar software platform
+
+   24 Hour Home Care
+   Software
+
+  24 Hour Home Care
+
+   2,590 words localized into ES-419 for healthcare staffing company
+
+   ActiveMap
+   Software
+
+  ActiveMap
+
+   18 000 words localized into AR
+
+   Adizes Institute
+   E-Learning
+
+  Adizes Institute
+
+   5,850 words localized into HE for leadership consulting platform
+
+   AI Chat Smith
+   E-Learning
+
+  AI Chat Smith
+
+   1 500 words per month localized into ES, JA, RU, ZH, DE, FR, PT-BR
+
+   Alice VR
+   Media
+
+  Alice VR
+
+   8 phrases localized into CA, EN, ES, RU
+
+   Read case study
+   Appewa
+   E-Learning
+
+  Appewa
+
+   100+ words localized into 20 languages for language learning app by
+   Lithium Lab
+
+   Associations
+   Games
+
+  Associations
+
+   3 000 words localized into TR, PL, SV-SE, NO, DA, CS, SK, HU, JA, KO, and
+   7 more
+
+   Aviloo
+   Software
+
+  Aviloo
+
+   5,000 words MTPE from DE into DA, NL, FR, IT, SV, NO for EV battery
+   diagnostics
+
+   Read case study
+   Berry Factory Tycoon
+   Games
+
+  Berry Factory Tycoon
+
+   1 500 words every two months localized into RU → EN, KO, JA
+
+   BestChange
+   Websites
+
+  BestChange
+
+   2 000 words per month localized into NL, PL, SV
+
+   Blink
+   E-Learning
+
+  Blink
+
+   32 300 words localized into FR
+
+   Bunny Boom
+   Games
+
+  Bunny Boom
+
+   3 000 words localized into DE, ES, FR, IT, JA, KO, PT-BR
+
+   Life is Feudal
+   Media
+
+  Life is Feudal
+
+   Character voiceovers for Life is Feudal: Your Own
+
+   Read case study
+   Cosmos VR
+   Media
+
+  Cosmos VR
+
+   2 000 words localized into CA, DE, EN, ES
+
+   Read case study
+   Darksy Cleaner
+   Mobile Apps
+
+  Darksy Cleaner
+
+   1,400 words localized into 9 languages for iOS photo cleaner app
+
+   Days After
+   Games
+
+  Days After
+
+   500 words every 1.5 months localized into RU → EN, PT-BR, ES; EN → DE, FR,
+   KO, AR, ZH-TW, ZH-CN, NO, PL, TH, CS, JA and 10 more languages on demand
+
+   Dople
+   Software
+
+  Dople
+
+   11 500 characters with space localized into KO → JA
+
+   eSIM Provider
+   Websites
+
+  eSIM Provider
+
+   around 30 000 words when requested localized into SQ, AR, HU, IT, IS, NL,
+   FR, DE
+
+   EXR
+   Games
+
+  EXR
+
+   12 000 words localized into ES, FR
+
+   GoodCrypto
+   Software
+
+  GoodCrypto
+
+   2 000 words per month localized into AR, ZH, FR, DE, ID, IT, KO, PT-BR,
+   ES, TR, VI
+
+   Haiku
+   Games
+
+  Haiku
+
+   10 000+ words localized into ES-419, PT-BR, DE, JA, ZH-CN
+
+   Impulse
+   E-Learning
+
+  Impulse
+
+   Impulse - Brain Training
+
+   IQ Dungeon
+   Games
+
+  IQ Dungeon
+
+   IQ Dungeon - Riddle Solving RPG
+
+   Knights and Brides
+   Games
+
+  Knights and Brides
+
+   Knights & Brides
+
+   Lexilize
+   E-Learning
+
+  Lexilize
+
+   7 000 words localized into FR
+
+   Darklings
+   Games
+
+  Darklings
+
+   1 000 words localized into JA, ZH, ES, RU, IT, FR, DE, PT, KO
+
+   Kill Shot Bravo
+   Games
+
+  Kill Shot Bravo
+
+   Localization of Kill Shot Bravo
+
+   Next Stop
+   Games
+
+  Next Stop
+
+   7 500 words localized into FR, DE, EN, JA
+
+   EcoCity
+   Games
+
+  EcoCity
+
+   Localization of the EcoCity game
+
+   Forced Showdown
+   Games
+
+  Forced Showdown
+
+   Localization of the Forced Showdown game
+
+   Minion Masters
+   Games
+
+  Minion Masters
+
+   Localization of the Minion Masters game
+
+   Outpost Zero
+   Games
+
+  Outpost Zero
+
+   Localization of the Outpost Zero game
+
+   Streets of Rogue
+   Games
+
+  Streets of Rogue
+
+   Localization of the Streets of Rogue game
+
+   Tamadog
+   Games
+
+  Tamadog
+
+   Localization of the Tamadog game
+
+   Valentine's Day
+   Games
+
+  Valentine's Day
+
+   into DE, FR, IT, ES, PT-BR
+
+   Mimic Logic
+   Games
+
+  Mimic Logic
+
+   13 000 characters localized into JA → EN, ZH-CN
+
+   Mini Golf 100+
+   Games
+
+  Mini Golf 100+
+
+   10 000 characters localized into Japanese –> English, German, French,
+   Spanish, Korean, Chinese (tw), Chinese (zh), Portuguese (Brazil)
+
+   Mini Mini Farm
+   Games
+
+  Mini Mini Farm
+
+   8 500 characters localized into Japanese –> English
+
+   mod.io
+   Games
+
+  mod.io
+
+   500 words localized into ZH-TW, ZH-CN, DE, IT, JA, KO, PL, RU, ES
+
+   MySignature
+   Websites
+
+  MySignature
+
+   1 500 words per month localized into IT, FR, NL, FI, PL, DE, ES, PT
+
+   Parasite Days
+   Games
+
+  Parasite Days
+
+   70 000 characters localized into Japanese –> English
+
+   PDIS
+   Software
+
+  PDIS
+
+   2 346 characters with space localized into KO → EN
+
+   PosterMyWall
+   E-Learning
+
+  PosterMyWall
+
+   1 000 words per month localized into ZH-HANS, DA, NL, FR, DE, ID, IT, PL,
+   PT, RU, ES, TH
+
+   Prospre
+   Software
+
+  Prospre
+
+   7 000 words localized into ZH-CN, FR, DE, IT, JA, PT-BR, ES-419
+
+   Ruins Magus
+   Games
+
+  Ruins Magus
+
+   38 000 characters localized into Japanese –> English
+
+   Samedi Manor
+   Games
+
+  Samedi Manor
+
+   2,000 words localized from RU into 7 languages for idle game by Black
+   Caviar Games
+
+   Soltec Health
+   E-Learning
+
+  Soltec Health
+
+   17 000 words per 6 months localized into JA
+
+   Soma Development
+   Software
+
+  Soma Development
+
+   8 000 words localized into AR, ZH-CN, FR, DE, ID, IT, JA, PT, RU, VI,
+   ES-419
+
+   Sonnet of Wizard
+   Games
+
+  Sonnet of Wizard
+
+   224 261 characters localized into Japanese –> English
+
+   Sportplus
+   Websites
+
+  Sportplus
+
+   800 words localized into AR, HI
+
+   Hotel Project
+   Games
+
+  Hotel Project
+
+   3,622 words localized into PT-BR for merge game by Next Epic
+
+   Tovie AI
+   Software
+
+  Tovie AI
+
+   4,800 words localized into ES, PT-BR for conversational AI platform
+
+   Ultight
+   Software
+
+  Ultight
+
+   5 046 characters with spaces localized into KO → EN
+
+   Underground Waifus
+   Games
+
+  Underground Waifus
+
+   4 300 words localized into JA, ZH-CN, KO, FR, IT, DE
+
+   UNNI
+   Software
+
+  UNNI
+
+   15 000 words per month localized into TH
+
+   Vlad & Niki
+   Games
+
+  Vlad & Niki
+
+   15,000 words localized into 10 languages for kids claymation game by RUD
+   present
+
+   Kerish Doctor
+   Media
+
+  Kerish Doctor
+
+   Voiceovers for the Kerish Doctor software
+
+   Read case study
+   Welcome Bot
+   Software
+
+  Welcome Bot
+
+   2 000 words localized into UK, LT, AR, ES, FR, DE, PT, IT, PL, HE, ID, TR,
+   HI, VI, MS, TH, CS, NL
+
+   WRD
+   Media
+
+  WRD
+
+   WRD – Learn Words App Voiceover
+
+   Read case study
+   Azur Games
+   Games
+
+  Azur Games
+
+   200 – 500 words per order localized into ID, PL, IT, TR, ZH-CN, ZH-TW, KO,
+   PT-BR, JA, FR, ES, DE, TH, HI
+
+   Conf.app
+   Software
+
+  Conf.app
+
+   4,500 words localized into IT, ZH-CN, PT-BR, DE, ES for event management
+   app
+
+   Character Bank
+   Software
+
+  Character Bank
+
+   Localization for Character Bank software platform
+
+   Coffee Break
+   Software
+
+  Coffee Break
+
+   Localization for Coffee Break software platform
+
+   Google
+   Software
+
+  Google
+
+   Localization for Google
+
+   GROOVE
+   Software
+
+  GROOVE
+
+   Localization for GROOVE X
+
+   Hakali
+   Software
+
+  Hakali
+
+   Localization for Hakali
+
+   Get Started
+
+Request a Quote
+
+   Whether you're launching in new markets or scaling existing localization —
+   let's make it happen.
+
+   Fill the form Book a call
+
+  Thank you — we've received your submission.
+
+   The next step is a short, free call to talk about your project.
+
+   How can we help?*
+   _________________________________________
+   _________________________________________
+   _________________________________________
+   _________________________________________
+   _________________________________________
+   _________________________________________
+   This field is required
+   +
+   Upload files _____________________ 
+   Your name* _____________________
+   This field is required
+   Your e-mail* _____________________
+   Please enter a valid email address
+   Your number with country code* _____________________
+   Please enter a valid phone number
+   Where did you learn about Alconost?* _____________________
+   This field is required
+   [ ] I agree to the Terms of Service and Privacy Policy. By submitting my
+   contact information on this website, I am consenting to receive calls,
+   SMS, and emails from Alconost and its affiliates.
+   This field is required
+   Submit
+   Request submission failed
+
+  Meow!
+
+   Oops! Something went wrong...
+
+   About
+
+  About
+
+   About Alconost Blog Case Studies Affiliate Partners
+
+  Order and Payment
+
+   Payment Methods Request a Quote
+
+  Careers
+
+   We Are Hiring Become a Translator
+
+  More of Alconost
+
+   Multilingual Marketing Video Production Nitro Translate Alconost.MT
+
+   Services
+
+  Translation & Localization
+
+   360° Localization Full-stack localization Software & Product Localization
+   Marketing & Content Translation SEO, ads, SMM Game Localization Website
+   Localization 24/7 On-Demand Human Translation
+
+  Media & DTP
+
+   Audio & Video Localization Transcribing, subtitling Desktop Publishing
+
+  Quality & Process
+
+   Service Levels & Pricing Languages, project planning, workflows Machine
+   Translation Post-Editing (MTPE) Human and AI Localization Testing & QA
+   Functional, linguistic, cultural Localization QA Proofreading & Editing
+   Cultural Analysis Vendor Management Outstaffing, full-stack teams, mixed
+   Asset Management Glossaries, TM, style guides
+
+  AI Services
+
+   AI/LLM-Powered Translation AI Translation Quality Control AI Data Services
+   Datasets, text, speech & audio labeling
+
+   Our Work
+
+  By Platform
+
+   Mobile iOS & Android Web Apps Desktop Software PC Gaming Steam, Epic, GOG
+   Game Consoles PlayStation, Xbox, Nintendo
+
+  By Content Type
+
+   UI/Software Strings Game Content Dialogue, quests, items Video & Audio
+   Subtitles, voiceover E-commerce Product listings, catalogs Technical
+   Documentation Manuals, API docs Marketing & Web Ads, SEO, websites Support
+   Help center, KB, FAQ Training E-learning, explainer videos Legal Terms of
+   service, privacy Finance Reports, banking HR Internal communications
+
+  By Industry
+
+   Gaming Technology & SaaS Mobile Apps E-Learning & Education Media &
+   Entertainment Automotive Customer Support Healthcare Travel & Hospitality
+   Sports & Fitness Logistics Finance & Banking Telecommunications E-Commerce
+   Food & Beverage IoT & Hardware Marketing & Advertising Real Estate Energy
+   & Sustainability Legal Manufacturing
+
+  By Language
+
+   FIGS French, Italian, German, Spanish CJK Chinese, Japanese, Korean
+   Eastern European Polish, Czech, Hungarian, Russian LATAM Latin American
+   Spanish, Brazilian Portuguese Nordic Swedish, Norwegian, Danish, Finnish
+   RTL Arabic, Hebrew, Farsi SEA Thai, Vietnamese, Indonesian
+
+   Technology
+
+  Localization Engineering
+
+   AI / LLM / NMT Integration Multi-agent systems, benchmarking,
+   post-training Continuous Localization Setup CI/CD pipelines Custom
+   Integrations and Workflows Human Translation API Backed by pro linguists
+
+  Alconost.MT Lab
+
+   Evaluate Evaluate & fix translations with LLMs MQM Annotation Tool
+   Error-based translation quality scoring Metrics COMET, MetricX, BLEU &
+   more
+
+  Localization Platforms
+
+   Crowdin Enterprise localization platform Tolgee Open-source localization
+   platform GitLocalize 2-way continuous localization for GitHub Platform
+   Selection Guide + SmartCAT, Lokalise, Phrase, MemoQ, XTM
+
+  Integrations & Connectors
+
+   WordPress WPML Git GitHub, GitLab Shopify Zendesk Moodle Need a Connector?
+   Contact us
+   Alconost
+
+   Professional localization and translation services for global companies.
+   Making products speak every language since 2004.
+
+     * LinkedIn
+     * Facebook
+     * Twitter
+     * YouTube
+   USA
+
+   700 N Fairfax St, suite 614-C, Alexandria, Virginia 22314, US
+
+   +1 (571) 357 3985 | info@alconost.com
+
+   Made with love for global brands worldwide
+
+   Terms of service Privacy policy ©2004-2026 Alconost Inc.

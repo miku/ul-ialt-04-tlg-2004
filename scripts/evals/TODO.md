@@ -1,5 +1,30 @@
 # TODO
 
+The end goal: run the metric stack against a fixed reference corpus and a
+swappable open-source translation model, to get comparable per-model scores.
+The scoring half is mostly here (with caveats below); the runner half is not.
+
+## Open-source model benchmarking
+
+- [ ] Pick a reference corpus. Candidates: FLORES-200 devtest (1012 sentences
+      per direction, professionally translated, permissive license),
+      WMT22/23 test sets, or a hand-curated set matching the content types
+      we actually care about (UI strings, narrative, marketing).
+- [ ] Pick an initial language pair set. Useful starting subset, taken from
+      the Alconost top languages by sample volume: en→{de, ja, zh-CN, pt-BR}
+      — coverage of morphologically rich / non-Latin / Latin alphabets.
+- [ ] Translation runner: takes (model, language pair, corpus), emits JSONL
+      with `src` / `mt` / `ref` so `extra.py` scores it without reshaping.
+- [ ] Support Ollama and any OpenAI-compatible chat endpoint (vLLM, LM
+      Studio). Cache translations on disk by (model, src) so a re-score
+      doesn't re-translate. Pattern can mirror `extra.py`'s embedding cache.
+- [ ] Initial model list to evaluate: NLLB-200, Madlad-400, Aya, Qwen,
+      Gemma, Llama. Include one proprietary anchor (e.g. Claude or Gemini
+      via API) for calibration against the Alconost numbers.
+- [ ] Per-model summary output: mean per metric + combined, with sample
+      size and per-language breakdown. Reuse `_emit_markdown` so the result
+      drops straight into a writeup.
+
 ## Alconost-index fidelity
 
 The current `extra.py` + `metrics.py` produce an Alconost-style composite with
