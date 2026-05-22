@@ -1,15 +1,17 @@
 # TODO
 
-The end goal: run the metric stack against a fixed reference corpus and a
+Goal: compute metrics over a fixed reference corpus and a
 swappable open-source translation model, to get comparable per-model scores.
 The scoring half is mostly here (with caveats below); the runner half is not.
 
 ## Open-source model benchmarking
 
-- [ ] Pick a reference corpus. Candidates: FLORES-200 devtest (1012 sentences
-      per direction, professionally translated, permissive license),
-      WMT22/23 test sets, or a hand-curated set matching the content types
-      we actually care about (UI strings, narrative, marketing).
+- [ ] Need a reference corpus. Candidates: the [Open Language Data
+      Initiative](https://oldi.org/) (OLDI) datasets — successor home for the
+      FLORES-style parallel data, actively maintained where FLORES-200 itself
+      effectively isn't; WMT22/23 test sets; or a hand-curated set matching
+      the content types we actually care about (UI strings, narrative,
+      marketing).
 - [ ] Pick an initial language pair set. Useful starting subset, taken from
       the Alconost top languages by sample volume: en→{de, ja, zh-CN, pt-BR}
       — coverage of morphologically rich / non-Latin / Latin alphabets.
