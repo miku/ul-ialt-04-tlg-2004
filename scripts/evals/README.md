@@ -12,11 +12,11 @@ Quick example in Python:
 $ python metrics.py
 ```
 
-Reference                           | Candidate                           | Jac    | BLEU   | ROUGE-1 | CHrF++ | nTER
-------------------------------------------------------------------------------------------------------------------------------------------------
-The cat sits on the mat             | The cat is sitting on the mat       | 0.571 | 0.052 | 0.833 | 0.704 | 0.333
-Hello world                         | Hello world                         | 1.000 | 1.000 | 1.000 | 1.000 | 0.000
-This is a complex translation test  | Something completely different      | 0.000 | 0.000 | 0.000 | 0.110 | 1.000
+| Reference | Candidate | Jac | BLEU | ROUGE-1 | CHrF++ | nTER |
+|---|---|---|---|---|---|---|
+| The cat sits on the mat | The cat is sitting on the mat | 0.571 | 0.052 | 0.833 | 0.704 | 0.333 |
+| Hello world | Hello world | 1.000 | 1.000 | 1.000 | 1.000 | 0.000 |
+| This is a complex translation test | Something completely different | 0.000 | 0.000 | 0.000 | 0.110 | 1.000 |
 
 Different metrics pick up different signals, example [Alconost Quality
 Index](https://alconost.com/en/blog/best-llm-for-translation-2026), which is a
